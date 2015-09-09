@@ -1,0 +1,536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E9425230B870A0B3CA286D60E14F28F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD0DDFA959AF51A69FA2CA5257433FD /* Foundation.framework */; };
+		1D5DF3EFBFB366E0F6984109FA81B808 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3259E5CAD6B6A13A3AA4C33F16FFC0 /* ImageDownloadOperation.swift */; };
+		20690DBEE07197EBC50ECA82098CD79D /* ImageGifExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ACB1BD90C73513CAB96196B482F514 /* ImageGifExtension.swift */; };
+		2DBD411540A9A8BCF15A4457AE3209F3 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79582037CD22B784FC088711C797CD3A /* DiskStorage.swift */; };
+		38B00B33D1641E0368AA60F95D3215E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD0DDFA959AF51A69FA2CA5257433FD /* Foundation.framework */; };
+		40D58AFA8D4826DAA6A2A915B5F8BF36 /* MapleBacon-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA561D49DC9CBAC84B18EB09C135BAD /* MapleBacon-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		44FEDB3FB20FC43E787EEF58B6AAFAC7 /* InMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214461576B33063F3C5868E173CE340 /* InMemoryStorage.swift */; };
+		5748072AD19ABAB89C990766947982F7 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4056A5701DD70F40B97EF6F74865E18 /* ImageViewExtension.swift */; };
+		5AE1CDE01B73882A02B7382E09DBDEB9 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3DD0FEFC2C5BD780C406BB6044BE40 /* Delay.swift */; };
+		61CFFCECE9D9DC8E253F5294394ADCF7 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873DF4C3037FB5612A0B2DA4211E6BDA /* MD5.swift */; };
+		681EBA0746CF7350E9F6E4D7017D7DA7 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1B4051E537063C54663DC1FC62048D /* ImageManager.swift */; };
+		7A4ED02AEC2BD391DFC383247014A3ED /* MapleBacon-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE9D61F650975F07FEE89EC8C4C438 /* MapleBacon-dummy.m */; };
+		8FC0FDE68CCBDDB1B2EF9280F001059B /* Resizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736E69345B77EE5CAB4B29CD0C371A1 /* Resizer.swift */; };
+		A6ABA50CA62576D9DA52E4CF1E54E7CD /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC4237BA58A46A1D525E24F5A4B48D1 /* Storage.swift */; };
+		D2587053EB3FB6FB8D1D1E70024263AF /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */; };
+		D8394AF9F55DAC346A5E10BB6BD1F580 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B5AD751766A3B7A71366603A3B3AE97E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0150A85C0CA60B3935EEA7E3318FE0A9;
+			remoteInfo = MapleBacon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0214461576B33063F3C5868E173CE340 /* InMemoryStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InMemoryStorage.swift; path = Library/MapleBacon/MapleBacon/Storage/InMemoryStorage.swift; sourceTree = "<group>"; };
+		04BF465390D11F01CCD745238CE0C8B1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		1A3DD0FEFC2C5BD780C406BB6044BE40 /* Delay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Delay.swift; path = Library/MapleBacon/MapleBacon/Delay.swift; sourceTree = "<group>"; };
+		1DA561D49DC9CBAC84B18EB09C135BAD /* MapleBacon-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MapleBacon-umbrella.h"; sourceTree = "<group>"; };
+		2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
+		3CC71AD2260D947ACC64E27F5CE6C575 /* MapleBacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MapleBacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E3259E5CAD6B6A13A3AA4C33F16FFC0 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDownloadOperation.swift; path = Library/MapleBacon/MapleBacon/ImageDownloadOperation.swift; sourceTree = "<group>"; };
+		7736E69345B77EE5CAB4B29CD0C371A1 /* Resizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Resizer.swift; path = Library/MapleBacon/MapleBacon/Resizer.swift; sourceTree = "<group>"; };
+		79582037CD22B784FC088711C797CD3A /* DiskStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DiskStorage.swift; path = Library/MapleBacon/MapleBacon/Storage/DiskStorage.swift; sourceTree = "<group>"; };
+		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
+		7E19D141F773293C71CD277970F8F495 /* MapleBacon.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MapleBacon.xcconfig; sourceTree = "<group>"; };
+		873DF4C3037FB5612A0B2DA4211E6BDA /* MD5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MD5.swift; path = Library/MapleBacon/MapleBacon/Storage/MD5.swift; sourceTree = "<group>"; };
+		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		90329421D92FD898437E214896FEC4EC /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BD0DDFA959AF51A69FA2CA5257433FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		A4056A5701DD70F40B97EF6F74865E18 /* ImageViewExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageViewExtension.swift; path = Library/MapleBacon/MapleBacon/ImageViewExtension.swift; sourceTree = "<group>"; };
+		A4FE9D61F650975F07FEE89EC8C4C438 /* MapleBacon-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MapleBacon-dummy.m"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BA6E347B459344595092D8A06DF6DC24 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE1B4051E537063C54663DC1FC62048D /* ImageManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageManager.swift; path = Library/MapleBacon/MapleBacon/ImageManager.swift; sourceTree = "<group>"; };
+		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		CE72297620EB87203348C80C36220012 /* MapleBacon-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MapleBacon-prefix.pch"; sourceTree = "<group>"; };
+		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DB8AF2DD1EA3FC1DF57C8108049214ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		DEC4237BA58A46A1D525E24F5A4B48D1 /* Storage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = Library/MapleBacon/MapleBacon/Storage/Storage.swift; sourceTree = "<group>"; };
+		E191E3C8ECFF159A47556A92DB7953A2 /* MapleBacon.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MapleBacon.modulemap; sourceTree = "<group>"; };
+		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2ACB1BD90C73513CAB96196B482F514 /* ImageGifExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageGifExtension.swift; path = Library/MapleBacon/MapleBacon/ImageGifExtension.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64B2779912F217D47588D9C49331DB19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9425230B870A0B3CA286D60E14F28F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F56F229263C150113CA8578EFC65FF75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38B00B33D1641E0368AA60F95D3215E1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18375B1478BC3EFF0E0E31A2E7589176 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A5F73622F6E044D96C4973F48A19E4AF /* MapleBacon */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		22DDC65B1531C49EF1999A99E756BCD2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BA6E347B459344595092D8A06DF6DC24 /* Info.plist */,
+				E191E3C8ECFF159A47556A92DB7953A2 /* MapleBacon.modulemap */,
+				7E19D141F773293C71CD277970F8F495 /* MapleBacon.xcconfig */,
+				A4FE9D61F650975F07FEE89EC8C4C438 /* MapleBacon-dummy.m */,
+				CE72297620EB87203348C80C36220012 /* MapleBacon-prefix.pch */,
+				1DA561D49DC9CBAC84B18EB09C135BAD /* MapleBacon-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MapleBacon";
+			sourceTree = "<group>";
+		};
+		30BE090BCA518C24595F61F0ABE9286F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CC71AD2260D947ACC64E27F5CE6C575 /* MapleBacon.framework */,
+				90329421D92FD898437E214896FEC4EC /* Pods.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		53F661C0CA7190D2CF05023FB33D61E4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9BD0DDFA959AF51A69FA2CA5257433FD /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		75D98FF52E597A11900E131B6C4E1ADA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */,
+				79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */,
+				D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */,
+				87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */,
+				894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */,
+				E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */,
+				CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */,
+				2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */,
+				DB8AF2DD1EA3FC1DF57C8108049214ED /* Pods.debug.xcconfig */,
+				04BF465390D11F01CCD745238CE0C8B1 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				18375B1478BC3EFF0E0E31A2E7589176 /* Pods */,
+				30BE090BCA518C24595F61F0ABE9286F /* Products */,
+				B7B80995527643776607AFFA75B91E24 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		A5F73622F6E044D96C4973F48A19E4AF /* MapleBacon */ = {
+			isa = PBXGroup;
+			children = (
+				1A3DD0FEFC2C5BD780C406BB6044BE40 /* Delay.swift */,
+				79582037CD22B784FC088711C797CD3A /* DiskStorage.swift */,
+				6E3259E5CAD6B6A13A3AA4C33F16FFC0 /* ImageDownloadOperation.swift */,
+				F2ACB1BD90C73513CAB96196B482F514 /* ImageGifExtension.swift */,
+				BE1B4051E537063C54663DC1FC62048D /* ImageManager.swift */,
+				A4056A5701DD70F40B97EF6F74865E18 /* ImageViewExtension.swift */,
+				0214461576B33063F3C5868E173CE340 /* InMemoryStorage.swift */,
+				873DF4C3037FB5612A0B2DA4211E6BDA /* MD5.swift */,
+				7736E69345B77EE5CAB4B29CD0C371A1 /* Resizer.swift */,
+				DEC4237BA58A46A1D525E24F5A4B48D1 /* Storage.swift */,
+				22DDC65B1531C49EF1999A99E756BCD2 /* Support Files */,
+			);
+			path = MapleBacon;
+			sourceTree = "<group>";
+		};
+		B7B80995527643776607AFFA75B91E24 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				75D98FF52E597A11900E131B6C4E1ADA /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53F661C0CA7190D2CF05023FB33D61E4 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3891A1D40DBF885BE98A9680F3538D20 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8394AF9F55DAC346A5E10BB6BD1F580 /* Pods-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C04D8646E241AF1140CEB7DA3F60F0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40D58AFA8D4826DAA6A2A915B5F8BF36 /* MapleBacon-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0150A85C0CA60B3935EEA7E3318FE0A9 /* MapleBacon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D473E5E9DDEB1EEF4E686588DA297432 /* Build configuration list for PBXNativeTarget "MapleBacon" */;
+			buildPhases = (
+				3EEA95798CBFAAF934C4FA4FCCD627D6 /* Sources */,
+				F56F229263C150113CA8578EFC65FF75 /* Frameworks */,
+				68C04D8646E241AF1140CEB7DA3F60F0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MapleBacon;
+			productName = MapleBacon;
+			productReference = 3CC71AD2260D947ACC64E27F5CE6C575 /* MapleBacon.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		82EAADB7CCEDDB40DF8452226809E458 /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A079F984CA18B447F571E1DE50DDAF2D /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				6F10F42AAEBEBEF729B8D9BBFFBCE5F7 /* Sources */,
+				64B2779912F217D47588D9C49331DB19 /* Frameworks */,
+				3891A1D40DBF885BE98A9680F3538D20 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D5CF4FD15D62D7075352B9638138C0B /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 90329421D92FD898437E214896FEC4EC /* Pods.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 30BE090BCA518C24595F61F0ABE9286F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0150A85C0CA60B3935EEA7E3318FE0A9 /* MapleBacon */,
+				82EAADB7CCEDDB40DF8452226809E458 /* Pods */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3EEA95798CBFAAF934C4FA4FCCD627D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AE1CDE01B73882A02B7382E09DBDEB9 /* Delay.swift in Sources */,
+				2DBD411540A9A8BCF15A4457AE3209F3 /* DiskStorage.swift in Sources */,
+				1D5DF3EFBFB366E0F6984109FA81B808 /* ImageDownloadOperation.swift in Sources */,
+				20690DBEE07197EBC50ECA82098CD79D /* ImageGifExtension.swift in Sources */,
+				681EBA0746CF7350E9F6E4D7017D7DA7 /* ImageManager.swift in Sources */,
+				5748072AD19ABAB89C990766947982F7 /* ImageViewExtension.swift in Sources */,
+				44FEDB3FB20FC43E787EEF58B6AAFAC7 /* InMemoryStorage.swift in Sources */,
+				7A4ED02AEC2BD391DFC383247014A3ED /* MapleBacon-dummy.m in Sources */,
+				61CFFCECE9D9DC8E253F5294394ADCF7 /* MD5.swift in Sources */,
+				8FC0FDE68CCBDDB1B2EF9280F001059B /* Resizer.swift in Sources */,
+				A6ABA50CA62576D9DA52E4CF1E54E7CD /* Storage.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F10F42AAEBEBEF729B8D9BBFFBCE5F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2587053EB3FB6FB8D1D1E70024263AF /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2D5CF4FD15D62D7075352B9638138C0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MapleBacon;
+			target = 0150A85C0CA60B3935EEA7E3318FE0A9 /* MapleBacon */;
+			targetProxy = B5AD751766A3B7A71366603A3B3AE97E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		199CB0A9A5385D7B4985B2C0856F0525 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB8AF2DD1EA3FC1DF57C8108049214ED /* Pods.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		454DA8D6FC18A23A70EB76C3A9FA86B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04BF465390D11F01CCD745238CE0C8B1 /* Pods.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4DFB23ADFE0C3B66F483AEBAE126C5F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E19D141F773293C71CD277970F8F495 /* MapleBacon.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.1.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MapleBacon/MapleBacon-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MapleBacon/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MapleBacon/MapleBacon.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MapleBacon;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		83FBEA5C6315F110EA0D26AC09A7B0C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E19D141F773293C71CD277970F8F495 /* MapleBacon.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.1.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MapleBacon/MapleBacon-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MapleBacon/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MapleBacon/MapleBacon.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MapleBacon;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
+				FB45FFD90572718D82AB9092B750F0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A079F984CA18B447F571E1DE50DDAF2D /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				199CB0A9A5385D7B4985B2C0856F0525 /* Debug */,
+				454DA8D6FC18A23A70EB76C3A9FA86B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D473E5E9DDEB1EEF4E686588DA297432 /* Build configuration list for PBXNativeTarget "MapleBacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DFB23ADFE0C3B66F483AEBAE126C5F3 /* Debug */,
+				83FBEA5C6315F110EA0D26AC09A7B0C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

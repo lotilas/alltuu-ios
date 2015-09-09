@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		82F1B31E1BA02BC000B4E8F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B31D1BA02BC000B4E8F7 /* AppDelegate.swift */; };
 		82F1B3211BA02BC000B4E8F7 /* alltuu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B31F1BA02BC000B4E8F7 /* alltuu.xcdatamodeld */; };
-		82F1B3231BA02BC000B4E8F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3221BA02BC000B4E8F7 /* ViewController.swift */; };
 		82F1B3261BA02BC000B4E8F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B3241BA02BC000B4E8F7 /* Main.storyboard */; };
 		82F1B3281BA02BC000B4E8F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B3271BA02BC000B4E8F7 /* Images.xcassets */; };
 		82F1B32B1BA02BC000B4E8F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B3291BA02BC000B4E8F7 /* LaunchScreen.xib */; };
 		82F1B3371BA02BC000B4E8F7 /* alltuuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3361BA02BC000B4E8F7 /* alltuuTests.swift */; };
-		A65BBAB7B297A90FB920A2F4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0680613B53CF69D1D4C416C0 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		82F1B3441BA02D4700B4E8F7 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3401BA02D4700B4E8F7 /* ActivityView.swift */; };
+		82F1B3451BA02D4700B4E8F7 /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3411BA02D4700B4E8F7 /* TweetTableViewController.swift */; };
+		82F1B3461BA02D4700B4E8F7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3421BA02D4700B4E8F7 /* Activity.swift */; };
+		82F1B3471BA02D4700B4E8F7 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3431BA02D4700B4E8F7 /* ActivityCell.swift */; };
+		82F1B3491BA02DAB00B4E8F7 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B3481BA02DAB00B4E8F7 /* loading.jpg */; };
+		82F1B3561BA0322F00B4E8F7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0680613B53CF69D1D4C416C0 /* Pods.framework */; };
+		82F1B35A1BA0360600B4E8F7 /* Pods.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0680613B53CF69D1D4C416C0 /* Pods.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +32,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		82F1B35B1BA0360600B4E8F7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				82F1B35A1BA0360600B4E8F7 /* Pods.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0680613B53CF69D1D4C416C0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37237399CD62F383A56A9519 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -34,13 +53,17 @@
 		82F1B31C1BA02BC000B4E8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82F1B31D1BA02BC000B4E8F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82F1B3201BA02BC000B4E8F7 /* alltuu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = alltuu.xcdatamodel; sourceTree = "<group>"; };
-		82F1B3221BA02BC000B4E8F7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		82F1B3251BA02BC000B4E8F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		82F1B3271BA02BC000B4E8F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		82F1B32A1BA02BC000B4E8F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		82F1B3301BA02BC000B4E8F7 /* alltuuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = alltuuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82F1B3351BA02BC000B4E8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82F1B3361BA02BC000B4E8F7 /* alltuuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alltuuTests.swift; sourceTree = "<group>"; };
+		82F1B3401BA02D4700B4E8F7 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		82F1B3411BA02D4700B4E8F7 /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
+		82F1B3421BA02D4700B4E8F7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		82F1B3431BA02D4700B4E8F7 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		82F1B3481BA02DAB00B4E8F7 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
 		DCB93D5F998AD74401A46E1A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A65BBAB7B297A90FB920A2F4 /* Pods.framework in Frameworks */,
+				82F1B3561BA0322F00B4E8F7 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,12 +117,13 @@
 		82F1B31A1BA02BC000B4E8F7 /* alltuu */ = {
 			isa = PBXGroup;
 			children = (
+				82F1B3401BA02D4700B4E8F7 /* ActivityView.swift */,
+				82F1B3411BA02D4700B4E8F7 /* TweetTableViewController.swift */,
+				82F1B3421BA02D4700B4E8F7 /* Activity.swift */,
+				82F1B3431BA02D4700B4E8F7 /* ActivityCell.swift */,
 				82F1B31D1BA02BC000B4E8F7 /* AppDelegate.swift */,
-				82F1B3221BA02BC000B4E8F7 /* ViewController.swift */,
 				82F1B3241BA02BC000B4E8F7 /* Main.storyboard */,
-				82F1B3271BA02BC000B4E8F7 /* Images.xcassets */,
-				82F1B3291BA02BC000B4E8F7 /* LaunchScreen.xib */,
-				82F1B31F1BA02BC000B4E8F7 /* alltuu.xcdatamodeld */,
+				82F1B3481BA02DAB00B4E8F7 /* loading.jpg */,
 				82F1B31B1BA02BC000B4E8F7 /* Supporting Files */,
 			);
 			path = alltuu;
@@ -108,6 +132,9 @@
 		82F1B31B1BA02BC000B4E8F7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				82F1B3271BA02BC000B4E8F7 /* Images.xcassets */,
+				82F1B3291BA02BC000B4E8F7 /* LaunchScreen.xib */,
+				82F1B31F1BA02BC000B4E8F7 /* alltuu.xcdatamodeld */,
 				82F1B31C1BA02BC000B4E8F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -152,6 +179,7 @@
 				82F1B3161BA02BC000B4E8F7 /* Resources */,
 				A8B428C49E8D0A6CC5EF3AC0 /* Embed Pods Frameworks */,
 				ABB4AB83555A4763BB5A550B /* Copy Pods Resources */,
+				82F1B35B1BA0360600B4E8F7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -222,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F1B3491BA02DAB00B4E8F7 /* loading.jpg in Resources */,
 				82F1B3261BA02BC000B4E8F7 /* Main.storyboard in Resources */,
 				82F1B32B1BA02BC000B4E8F7 /* LaunchScreen.xib in Resources */,
 				82F1B3281BA02BC000B4E8F7 /* Images.xcassets in Resources */,
@@ -290,9 +319,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82F1B3231BA02BC000B4E8F7 /* ViewController.swift in Sources */,
+				82F1B3461BA02D4700B4E8F7 /* Activity.swift in Sources */,
 				82F1B3211BA02BC000B4E8F7 /* alltuu.xcdatamodeld in Sources */,
+				82F1B3451BA02D4700B4E8F7 /* TweetTableViewController.swift in Sources */,
 				82F1B31E1BA02BC000B4E8F7 /* AppDelegate.swift in Sources */,
+				82F1B3471BA02D4700B4E8F7 /* ActivityCell.swift in Sources */,
+				82F1B3441BA02D4700B4E8F7 /* ActivityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +454,7 @@
 			baseConfigurationReference = 37237399CD62F383A56A9519 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = alltuu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -434,6 +467,7 @@
 			baseConfigurationReference = DCB93D5F998AD74401A46E1A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = alltuu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

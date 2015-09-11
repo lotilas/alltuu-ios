@@ -21,7 +21,7 @@ var refreshStatus:RefreshStatus = .Normal
 var tableViewOriginContentInset:UIEdgeInsets = UIEdgeInsetsZero
 
 
-class ActivitiesViewController: UICollectionViewController {
+class ActivitiesViewController: AtViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
     var activities = [[Activity]]()
     
@@ -33,7 +33,10 @@ class ActivitiesViewController: UICollectionViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+//         NSThread.sleepForTimeInterval(3.0)//延长3秒
         
+        self.activitiesView.dataSource = self
+        self.activitiesView.delegate = self
         self.activitiesView.toLoadMoreAction( { () -> () in
             self.delay(0.5, closure: { () -> () in})
             self.delay(0.5, closure: { () -> () in
@@ -45,29 +48,31 @@ class ActivitiesViewController: UICollectionViewController {
 
     }
     
-    // MARK: - Table view data source
-    
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return activities.count
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return activities[section].count
-    }
-    
     private struct StoryBoard {
         static let CellReuseIdentifier = "Activity"
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ActivityCell {
+    // MARK: - CollectionViewDataSource
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return activities.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return activities[section].count
+    }
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(StoryBoard.CellReuseIdentifier, forIndexPath: indexPath) as! ActivityCell
         cell.activity = activities[indexPath.section][indexPath.row]
         return cell
     }
     
-    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        
+    // MARK: - CollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        println("点击了\(indexPath.section)的第\(indexPath.item)个")
     }
+    
+   
+
     
     func more(){
         var request = HTTPTask()
@@ -79,6 +84,8 @@ class ActivitiesViewController: UICollectionViewController {
                 return
             }
             let data = response.responseObject as! NSData
+//            println("\(NSString(data:data, encoding:NSUTF8StringEncoding))")
+            
             let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
             var array = [Activity]()
             if let lists : AnyObject = dict["lists"]{
@@ -93,20 +100,19 @@ class ActivitiesViewController: UICollectionViewController {
                     } else {
                         self.activitiesView.didLoadMore()
                     }
-                    self.collectionView!.reloadData()
+                    self.activitiesView!.reloadData()
                 }
             }
 
         })
     }
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? ActivityCell {
+            if let destCtrler = segue.destinationViewController as? ActivityPhotosViewController{
+                destCtrler.activityId = cell.activity!.id
+            }
+        }
     }
 }
 

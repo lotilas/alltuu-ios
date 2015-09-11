@@ -27,7 +27,7 @@ public class ActivityCell: UICollectionViewCell {
     }
     
     public override func removeFromSuperview() {
-        println("remove")
+//        println("remove")
     }
     
     func updateUI(){
@@ -36,10 +36,15 @@ public class ActivityCell: UICollectionViewCell {
         // set cell properties
         activityTitle.text = activity!.title
         activityAddr.text = activity!.addr
+        if activity!.needPassword {
+            activityImage.alpha = 0.5
+        } else {
+            activityImage.alpha = 1.0
+        }
                 
-        let activityImageName = "activities/\(activity!.id)/cover/cover.jpg"
+        let cacheKey = activity!.toCachedKey()
         
-        cache.fetch(key: activityImageName).onSuccess { image in
+        cache.fetch(key: cacheKey).onSuccess { image in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.activityImage.image = image
             }
@@ -57,10 +62,10 @@ public class ActivityCell: UICollectionViewCell {
                 dispatch_async(q) { () -> Void in
                     if let imageData = NSData(contentsOfURL: NSURL(string: urlStr)!){
                         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                            println("\(NSDate()) LOAD END \(self.activity!.id)")
+//                            println("\(NSDate()) LOAD END \(self.activity!.id)")
                             self.activityImage.image = UIImage(data: imageData)
                         }
-                        cache.set(value: UIImage(data:imageData)!, key: activityImageName)
+                        cache.set(value: UIImage(data:imageData)!, key: cacheKey)
                     }
                 }
             }

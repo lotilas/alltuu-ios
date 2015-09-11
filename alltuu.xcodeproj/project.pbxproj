@@ -14,12 +14,20 @@
 		82F1B32B1BA02BC000B4E8F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B3291BA02BC000B4E8F7 /* LaunchScreen.xib */; };
 		82F1B3371BA02BC000B4E8F7 /* alltuuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3361BA02BC000B4E8F7 /* alltuuTests.swift */; };
 		82F1B3441BA02D4700B4E8F7 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3401BA02D4700B4E8F7 /* ActivityView.swift */; };
-		82F1B3451BA02D4700B4E8F7 /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3411BA02D4700B4E8F7 /* TweetTableViewController.swift */; };
 		82F1B3461BA02D4700B4E8F7 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3421BA02D4700B4E8F7 /* Activity.swift */; };
 		82F1B3471BA02D4700B4E8F7 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3431BA02D4700B4E8F7 /* ActivityCell.swift */; };
 		82F1B3491BA02DAB00B4E8F7 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B3481BA02DAB00B4E8F7 /* loading.jpg */; };
 		82F1B3561BA0322F00B4E8F7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0680613B53CF69D1D4C416C0 /* Pods.framework */; };
 		82F1B35A1BA0360600B4E8F7 /* Pods.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0680613B53CF69D1D4C416C0 /* Pods.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		82F1B3601BA09FE300B4E8F7 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B35F1BA09FE300B4E8F7 /* ActivitiesViewController.swift */; };
+		82F1B3671BA0A2EA00B4E8F7 /* ZLSwiftConstDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3631BA0A2EA00B4E8F7 /* ZLSwiftConstDefine.swift */; };
+		82F1B3681BA0A2EA00B4E8F7 /* ZLSwiftFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3641BA0A2EA00B4E8F7 /* ZLSwiftFootView.swift */; };
+		82F1B3701BA16C7F00B4E8F7 /* MyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B36B1BA16C7F00B4E8F7 /* MyLayout.swift */; };
+		82F1B3711BA16C7F00B4E8F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B36C1BA16C7F00B4E8F7 /* ViewController.swift */; };
+		82F1B3721BA16C7F00B4E8F7 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B36D1BA16C7F00B4E8F7 /* MyCollectionViewCell.swift */; };
+		82F1B3731BA16C7F00B4E8F7 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82F1B36E1BA16C7F00B4E8F7 /* MyCollectionViewCell.xib */; };
+		82F1B3741BA16C7F00B4E8F7 /* LSImgZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B36F1BA16C7F00B4E8F7 /* LSImgZoomView.swift */; };
+		82F1B3981BA17DA600B4E8F7 /* Seperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F1B3971BA17DA600B4E8F7 /* Seperate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,10 +68,18 @@
 		82F1B3351BA02BC000B4E8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82F1B3361BA02BC000B4E8F7 /* alltuuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alltuuTests.swift; sourceTree = "<group>"; };
 		82F1B3401BA02D4700B4E8F7 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		82F1B3411BA02D4700B4E8F7 /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
 		82F1B3421BA02D4700B4E8F7 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		82F1B3431BA02D4700B4E8F7 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		82F1B3481BA02DAB00B4E8F7 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
+		82F1B35F1BA09FE300B4E8F7 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
+		82F1B3631BA0A2EA00B4E8F7 /* ZLSwiftConstDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLSwiftConstDefine.swift; sourceTree = "<group>"; };
+		82F1B3641BA0A2EA00B4E8F7 /* ZLSwiftFootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLSwiftFootView.swift; sourceTree = "<group>"; };
+		82F1B36B1BA16C7F00B4E8F7 /* MyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLayout.swift; sourceTree = "<group>"; };
+		82F1B36C1BA16C7F00B4E8F7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		82F1B36D1BA16C7F00B4E8F7 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		82F1B36E1BA16C7F00B4E8F7 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
+		82F1B36F1BA16C7F00B4E8F7 /* LSImgZoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSImgZoomView.swift; sourceTree = "<group>"; };
+		82F1B3971BA17DA600B4E8F7 /* Seperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seperate.swift; sourceTree = "<group>"; };
 		DCB93D5F998AD74401A46E1A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,12 +134,12 @@
 			isa = PBXGroup;
 			children = (
 				82F1B3401BA02D4700B4E8F7 /* ActivityView.swift */,
-				82F1B3411BA02D4700B4E8F7 /* TweetTableViewController.swift */,
-				82F1B3421BA02D4700B4E8F7 /* Activity.swift */,
+				82F1B35F1BA09FE300B4E8F7 /* ActivitiesViewController.swift */,
 				82F1B3431BA02D4700B4E8F7 /* ActivityCell.swift */,
 				82F1B31D1BA02BC000B4E8F7 /* AppDelegate.swift */,
 				82F1B3241BA02BC000B4E8F7 /* Main.storyboard */,
 				82F1B3481BA02DAB00B4E8F7 /* loading.jpg */,
+				82F1B3961BA17D8600B4E8F7 /* entity */,
 				82F1B31B1BA02BC000B4E8F7 /* Supporting Files */,
 			);
 			path = alltuu;
@@ -132,6 +148,8 @@
 		82F1B31B1BA02BC000B4E8F7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				82F1B3751BA16C8500B4E8F7 /* WaterfallView */,
+				82F1B3621BA0A2EA00B4E8F7 /* ZLSwifthRefresh */,
 				82F1B3271BA02BC000B4E8F7 /* Images.xcassets */,
 				82F1B3291BA02BC000B4E8F7 /* LaunchScreen.xib */,
 				82F1B31F1BA02BC000B4E8F7 /* alltuu.xcdatamodeld */,
@@ -155,6 +173,36 @@
 				82F1B3351BA02BC000B4E8F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		82F1B3621BA0A2EA00B4E8F7 /* ZLSwifthRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				82F1B3631BA0A2EA00B4E8F7 /* ZLSwiftConstDefine.swift */,
+				82F1B3641BA0A2EA00B4E8F7 /* ZLSwiftFootView.swift */,
+			);
+			path = ZLSwifthRefresh;
+			sourceTree = "<group>";
+		};
+		82F1B3751BA16C8500B4E8F7 /* WaterfallView */ = {
+			isa = PBXGroup;
+			children = (
+				82F1B36B1BA16C7F00B4E8F7 /* MyLayout.swift */,
+				82F1B36C1BA16C7F00B4E8F7 /* ViewController.swift */,
+				82F1B36D1BA16C7F00B4E8F7 /* MyCollectionViewCell.swift */,
+				82F1B36E1BA16C7F00B4E8F7 /* MyCollectionViewCell.xib */,
+				82F1B36F1BA16C7F00B4E8F7 /* LSImgZoomView.swift */,
+			);
+			name = WaterfallView;
+			sourceTree = "<group>";
+		};
+		82F1B3961BA17D8600B4E8F7 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				82F1B3421BA02D4700B4E8F7 /* Activity.swift */,
+				82F1B3971BA17DA600B4E8F7 /* Seperate.swift */,
+			);
+			name = entity;
 			sourceTree = "<group>";
 		};
 		BBD17FAF3A3ED17E61889F6D /* Pods */ = {
@@ -250,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F1B3731BA16C7F00B4E8F7 /* MyCollectionViewCell.xib in Resources */,
 				82F1B3491BA02DAB00B4E8F7 /* loading.jpg in Resources */,
 				82F1B3261BA02BC000B4E8F7 /* Main.storyboard in Resources */,
 				82F1B32B1BA02BC000B4E8F7 /* LaunchScreen.xib in Resources */,
@@ -319,12 +368,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F1B3721BA16C7F00B4E8F7 /* MyCollectionViewCell.swift in Sources */,
+				82F1B3711BA16C7F00B4E8F7 /* ViewController.swift in Sources */,
+				82F1B3741BA16C7F00B4E8F7 /* LSImgZoomView.swift in Sources */,
 				82F1B3461BA02D4700B4E8F7 /* Activity.swift in Sources */,
+				82F1B3601BA09FE300B4E8F7 /* ActivitiesViewController.swift in Sources */,
 				82F1B3211BA02BC000B4E8F7 /* alltuu.xcdatamodeld in Sources */,
-				82F1B3451BA02D4700B4E8F7 /* TweetTableViewController.swift in Sources */,
+				82F1B3671BA0A2EA00B4E8F7 /* ZLSwiftConstDefine.swift in Sources */,
 				82F1B31E1BA02BC000B4E8F7 /* AppDelegate.swift in Sources */,
 				82F1B3471BA02D4700B4E8F7 /* ActivityCell.swift in Sources */,
+				82F1B3701BA16C7F00B4E8F7 /* MyLayout.swift in Sources */,
+				82F1B3681BA0A2EA00B4E8F7 /* ZLSwiftFootView.swift in Sources */,
 				82F1B3441BA02D4700B4E8F7 /* ActivityView.swift in Sources */,
+				82F1B3981BA17DA600B4E8F7 /* Seperate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

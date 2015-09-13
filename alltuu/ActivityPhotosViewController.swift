@@ -26,6 +26,8 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     var seperates = [[Seperate]]()
     var photos = [[ActivityPhoto]]()
     
+    var loadingPhotos = Array<ActivityPhoto>()
+    
     //相对位置
     var content_y =  CGFloat()
     
@@ -35,6 +37,10 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photos.removeAll()
+        loadingPhotos.removeAll()
+        seperates.removeAll()
         
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
         
@@ -56,8 +62,6 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         
         self.getSep()
         
-        
-        
     }
     
     //UICollectionViewDataSource
@@ -77,7 +81,18 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         //
         let item_w = (collectionview.frame.size.width-8)*0.5
         
-        return CGSizeMake(item_w, item_w)
+        let photo = self.photos[indexPath.section][indexPath.item]
+        
+        let imgsize = photo.size
+        let isLanscape = imgsize.width>imgsize.height
+        let img_h =  (imgsize.height*item_w)/imgsize.width
+//        if !isLanscape {
+//            println("[\(isLanscape)]photo:\(photo.id) SIZE:(\(imgsize.width),\(imgsize.height)) RESIZE:(\(item_w),\(img_h))")
+//        }
+        
+        
+        
+        return CGSizeMake(item_w, img_h)
     }
     
     private struct StoryBoard{
@@ -88,8 +103,7 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         //
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(StoryBoard.CellReuseIdentifier, forIndexPath: indexPath) as! ActivityPhotoCell
         
-        cell.photo = self.photos[indexPath.section][indexPath.item
-        ]
+        cell.photo = self.photos[indexPath.section][indexPath.item]
         
         return cell
     }
@@ -132,7 +146,6 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     func getSep(){
         if activityId > 0 {
-            currentPage++
             var request = HTTPTask()
             request.GET("http://m.alltuu.com/activity/sep/\(activityId)", parameters: nil, completionHandler: {(response: HTTPResponse) in
                 if let err = response.error {
@@ -164,8 +177,12 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     func more(){
         if activityId > 0 {
+            
             currentPage++
+//            println("\(currentPage)")
+            self.photos.append(Array<ActivityPhoto>())
             var request = HTTPTask()
+//            println("http://m.alltuu.com/activity/show/\(405)/\(1150)/12/1")
             request.GET("http://m.alltuu.com/activity/show/\(activityId)/\(currentSepId)/\(pageCount)/\(currentPage)", parameters: nil, completionHandler: {(response: HTTPResponse) in
                 if let err = response.error {
                     println("error: \(err.localizedDescription)")
@@ -173,21 +190,26 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
                 }
                 let data = response.responseObject as! NSData
                 let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-                var array = [ActivityPhoto]()
                 if let lists : AnyObject = dict["lists"]{
                     let photos = lists as! NSArray
                     for photo in photos {
-                        array.append(ActivityPhoto(dictionary: photo as! NSDictionary, activityId:self.activityId))
+                        self.loadingPhotos.append(ActivityPhoto(dictionary: photo as! NSDictionary, activityId:self.activityId))
                     }
-                    self.photos.append(array)
-//                    println("DID LOAD \(array.count) Photos")
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        if array.count < self.pageCount {
-                            self.waterfallView.didLoadAll()
-                        } else {
-                            self.waterfallView.didLoadMore()
+                    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {() -> Void in
+                        var ind = 0
+                        while self.loadingPhotos.count != 0 {
+                            var inD = ind++
+                            var photo = self.loadingPhotos.first
+                            self.loadingPhotos.first?.downloadPhoto( { (onSuccess) -> Void in
+                                self.photos[self.currentPage-1].append(photo!)
+                                println("APP:\(inD) \(photo!.id)")
+                                dispatch_async(dispatch_get_main_queue()) { ()->Void in
+                                    self.waterfallView.reloadData()
+//                                    println("reload")
+                                }
+                            })
+                            self.loadingPhotos.removeAtIndex(0)
                         }
-                        self.waterfallView!.reloadData()
                     }
                 }
             })

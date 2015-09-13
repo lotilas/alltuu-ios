@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftHTTP
+import Haneke
 
 enum RefreshStatus{
     case Normal, Refresh, LoadMore
@@ -43,6 +44,9 @@ class ActivitiesViewController: AtViewController, UICollectionViewDataSource, UI
                 self.more()
             })
         })
+        
+        println("clear cached")
+        Shared.imageCache.removeAll()
         
         self.more()
 

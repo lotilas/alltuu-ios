@@ -1,8 +1,8 @@
 //
-//  Activity.swift
-//  Smashtag
+//  ActivityPhoto.swift
+//  alltuu
 //
-//  Created by MAC on 15/9/8.
+//  Created by MAC on 15/9/11.
 //  Copyright (c) 2015年 Alltuu. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ public class Activity {
     public let addr: String
     public let adateDot: String
     public let title: String
+    public let needPassword: Bool
     
     init(dictionary : NSDictionary){
         if let id = dictionary["id"] as? NSNumber {
@@ -36,5 +37,14 @@ public class Activity {
         } else {
             self.title = "无"
         }
+        if let needPassword = dictionary["np"] as? Bool {
+            self.needPassword = needPassword as Bool
+        } else {
+            self.needPassword = false
+        }
+    }
+    
+    func toCachedKey() -> String {
+        return "activities/\(id)/cover/cover.jpg"
     }
 }

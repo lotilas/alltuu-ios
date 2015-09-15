@@ -10,4 +10,8 @@ import UIKit
 
 class ActivityPhotosView: AtCollectionView {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.backgroundColor = UIColor(colorString: "#F6F6F6").CGColor
+    }
 }

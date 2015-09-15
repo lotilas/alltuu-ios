@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftHTTP
 
 typealias closeBlock = (Bool) -> Void
 
@@ -34,12 +35,16 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     //初始大小位置
     var base_frame = CGRect()
     
+    var photo:ActivityPhoto?
+    
     //block返回
     var blockClose:closeBlock?
     
-    init(baseframe: CGRect) {
+    init(baseframe: CGRect, p:ActivityPhoto) {
         //
         super.init(frame: baseframe)
+        
+        self.photo = p
         
         base_frame = baseframe
         
@@ -64,6 +69,31 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         zoomview!.backgroundColor = UIColor.lightGrayColor()
         rootview!.addSubview(zoomview!)
         
+        var request = HTTPTask()
+        request.GET("http://m.alltuu.com/photo/\(self.photo!.activityId)/\(self.photo!.seperateId)/\(self.photo!.id)/0", parameters: nil, completionHandler: {(response: HTTPResponse) in
+            if let err = response.error {
+                println("error: \(err.localizedDescription)")
+                return
+            }
+            let data = response.responseObject as! NSData
+            let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
+            var array = [Seperate]()
+            if let lists : NSArray = dict["lists"] as? NSArray{
+                if let info : NSDictionary = lists[0] as? NSDictionary{
+                    self.zoomview?.hnk_setImageFromURL(NSURL(string:info["url"] as! String)!,success:{i in
+                        self.zoomview?.image = i
+                    },failure:{j in
+                        println("F : \(j?.description)")
+                    })
+                }
+            }
+        })
+        
+        
+        
+       
+
+        
         //双击事件
         
         let doubleTap = UITapGestureRecognizer(target: self, action: "actionOfDoubleTap:")
@@ -77,7 +107,6 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         closeTap.numberOfTouchesRequired = 1
         closeTap.requireGestureRecognizerToFail(doubleTap)
         rootview!.addGestureRecognizer(closeTap)
-        
     }
     
     //传递一张图片

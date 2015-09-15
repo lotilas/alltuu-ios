@@ -10,23 +10,27 @@ import UIKit
 import SwiftHTTP
 import Haneke
 
-class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,UICollectionViewDataSource,WaterFallLayoutDelegate,ActivityPhotoZoomingViewDelegate {
-    
-    var layout: ActivityPhotosViewLayout?
-    
+class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,UICollectionViewDataSource,ActivityPhotoZoomingViewDelegate{
     
     @IBOutlet weak var waterfallView: ActivityPhotosView!
+    
+    
+    @IBOutlet weak var photographerBarView: PhotographerBarView!
+    
+    
+    @IBOutlet weak var seperateBarView: SeperateBarView!
     
     var pageCount = 12
     var currentPage = 0
     var activityId = 0
     var activityTitle :String?
-    var currentSepId = 0
+    var seperateId = 0
     
-    var seperates = [[Seperate]]()
+    var seperates = [Seperate]()
     var photos = [[ActivityPhoto]]()
+    var photographers = [Photographer]()
     
-    var loadingPhotos = Array<ActivityPhoto>()
+    var titles:Array<String>?
     
     //相对位置
     var content_y =  CGFloat()
@@ -35,64 +39,42 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         
     }
     
+    func resetData(){
+        photos.removeAll()
+        seperates.removeAll()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        photos.removeAll()
-        loadingPhotos.removeAll()
-        seperates.removeAll()
-        
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
-        
-        layout = ActivityPhotosViewLayout()
-        layout!.delegate = self
+
+        self.resetData()
         
         //waterfallView
-        
-        waterfallView.setCollectionViewLayout(layout!, animated: true)
         waterfallView.delegate = self
         waterfallView.dataSource = self
+        
+        self.seperateBarView.seperateSwitchDelegate = self      //seperate switch
         
         self.waterfallView.toLoadMoreAction( { () -> () in
             self.delay(0.5, closure: { () -> () in})
             self.delay(0.5, closure: { () -> () in
-                self.getSep()
+                self.getPhotos()
             })
         })
         
-        self.getSep()
-        
+        self.getSeperates()
     }
     
     //UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-//        println("\(photos.count)")
+//        println("count1:\(photos.count)")
         return photos.count
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        println("\(photos[section].count)")
+//        println("count:\(photos[section].count)")
         return photos[section].count
-    }
-
-    func collectionView(collectionview: UICollectionView, layout: UICollectionViewLayout, indexPath: NSIndexPath) -> CGSize {
-        let cache = Shared.imageCache
-        //
-        let item_w = (collectionview.frame.size.width-8)*0.5
-        
-        let photo = self.photos[indexPath.section][indexPath.item]
-        
-        let imgsize = photo.size
-        let isLanscape = imgsize.width>imgsize.height
-        let img_h =  (imgsize.height*item_w)/imgsize.width
-//        if !isLanscape {
-//            println("[\(isLanscape)]photo:\(photo.id) SIZE:(\(imgsize.width),\(imgsize.height)) RESIZE:(\(item_w),\(img_h))")
-//        }
-        
-        
-        
-        return CGSizeMake(item_w, img_h)
     }
     
     private struct StoryBoard{
@@ -110,15 +92,16 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     
     
-    //UICollectionViewDelegate
+    //UICollectionViewDeleoverride gate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ActivityPhotoCell
         cell.photoView.hidden = true
         
-        var baseframe = CGRectMake(cell.frame.origin.x, cell.frame.origin.y-content_y, cell.frame.size.width, cell.frame.size.height)
+        println("\(self.waterfallView.frame.origin.y)")
+        var baseframe = CGRectMake(cell.frame.origin.x, cell.frame.origin.y-content_y+self.waterfallView.frame.origin.y, cell.frame.size.width, cell.frame.size.height)
         
-        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe)
+        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:cell.photo!)
         zoomv.delegate = self
         zoomv.setCurrImg(cell.photoView.image!)
         zoomv.show()
@@ -142,77 +125,92 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        Shared.imageCache.removeAll()
     }
     
-    func getSep(){
+    // MARK: http获取
+    //划分
+    func getSeperates(){
         if activityId > 0 {
-            var request = HTTPTask()
-            request.GET("http://m.alltuu.com/activity/sep/\(activityId)", parameters: nil, completionHandler: {(response: HTTPResponse) in
-                if let err = response.error {
-                    println("error: \(err.localizedDescription)")
-                    return
+            AtHttpClient().getSeperates(activityId, returnHandler:{ (error:Int, seperates:Array<Seperate>) in
+                println("\(error)")
+                self.seperates = seperates
+                if self.seperateId == 0 {
+                    self.seperateId = seperates[0].sepId
                 }
-                let data = response.responseObject as! NSData
-                let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-                var array = [Seperate]()
-                if let lists : NSDictionary = dict["lists"] as? NSDictionary{
-                    if let seps : NSArray = lists["seps"] as? NSArray{
-                        for sep in seps {
-                            array.append(Seperate(dictionary: sep as! NSDictionary))
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.loadSepSelector()
+                }
+                self.getPhotos()
+                self.getPhotographers()
+            })
+        }
+    }
+    
+    //摄影师
+    func getPhotographers(){
+        if seperateId > 0 {
+            AtHttpClient().getPhotographers(seperateId, returnHandler: { (error:Int, photographers:Array<Photographer>) in
+                self.photographers = photographers
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    if photographers.count > 0 {
+                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                            self.loadPhotographers()
                         }
-                        self.seperates.append(array)
-//                        println("DID LOAD \(array.count) Seps")
-                        self.currentSepId = array[0].sepId
-                        self.more()
-                        self.loadSepSelector()
                     }
                 }
             })
         }
     }
-    
-    func loadSepSelector(){
-        
+
+    //照片
+    func getPhotos(){
+        if activityId > 0 {
+            currentPage++
+            AtHttpClient().getPhotos(activityId, seperateId:seperateId, pageCount:pageCount, currentPage:currentPage, returnHandler:{ (error:Int, seperates:Array<ActivityPhoto>) in
+                self.photos.append(seperates)
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    if seperates.count < self.pageCount {
+                        self.waterfallView.didLoadAll()
+                    } else {
+                        self.waterfallView.didLoadMore()
+                    }
+                    self.waterfallView!.reloadData()
+                }
+
+            })
+        }
     }
     
-    func more(){
-        if activityId > 0 {
-            
-            currentPage++
-//            println("\(currentPage)")
-            self.photos.append(Array<ActivityPhoto>())
-            var request = HTTPTask()
-//            println("http://m.alltuu.com/activity/show/\(405)/\(1150)/12/1")
-            request.GET("http://m.alltuu.com/activity/show/\(activityId)/\(currentSepId)/\(pageCount)/\(currentPage)", parameters: nil, completionHandler: {(response: HTTPResponse) in
-                if let err = response.error {
-                    println("error: \(err.localizedDescription)")
-                    return
-                }
-                let data = response.responseObject as! NSData
-                let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-                if let lists : AnyObject = dict["lists"]{
-                    let photos = lists as! NSArray
-                    for photo in photos {
-                        self.loadingPhotos.append(ActivityPhoto(dictionary: photo as! NSDictionary, activityId:self.activityId))
-                    }
-                    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {() -> Void in
-                        var ind = 0
-                        while self.loadingPhotos.count != 0 {
-                            var inD = ind++
-                            var photo = self.loadingPhotos.first
-                            self.loadingPhotos.first?.downloadPhoto( { (onSuccess) -> Void in
-                                self.photos[self.currentPage-1].append(photo!)
-                                println("APP:\(inD) \(photo!.id)")
-                                dispatch_async(dispatch_get_main_queue()) { ()->Void in
-                                    self.waterfallView.reloadData()
-//                                    println("reload")
-                                }
-                            })
-                            self.loadingPhotos.removeAtIndex(0)
-                        }
-                    }
-                }
-            })
+    func loadSepSelector(){
+        for seperate in seperates {
+            var btn:SeperateBarButton = SeperateBarButton(titleText: seperate.sepName, sepId:seperate.sepId)
+            seperateBarView.addSubview(btn)
+        }
+        self.seperateBarView.highlightButtonAt(0)
+    }
+    
+    func loadPhotographers(){
+        photographerBarView.removeAllPhotographers()
+        for photographer in photographers {
+            var btn:PhotographerBarButton = PhotographerBarButton(photographer: photographer)
+            photographerBarView.addSubview(btn)
+        }
+    }
+    
+    // MARK: seperateSwitchDelegate
+    //点击按钮切换划分
+    func onSeperateSwitch(sender:UIButton){
+        if let button = sender as? SeperateBarButton {
+            seperateId = button.sepId
+            seperateBarView.highlightButton(button)
+            currentPage = 0
+            photographers.removeAll()
+            photos.removeAll()
+            waterfallView.reloadData()
+            waterfallView.scrollRectToVisible(CGRect(x: 0,y: 0,width: waterfallView.frame.width,height: 0), animated: false)
+            getPhotos()
+            getPhotographers()
         }
     }
     

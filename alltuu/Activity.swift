@@ -10,6 +10,13 @@ import Foundation
 
 public class Activity {
     
+    enum ActivityStatus:Int{
+        case COMING = 1
+        case ONLINE = 0
+        case OFFLINE = 2
+        case ERROR = -1
+    }
+    
     public let id: NSInteger
     public let addr: String
     public let adateDot: String

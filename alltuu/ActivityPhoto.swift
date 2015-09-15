@@ -14,10 +14,11 @@ public class ActivityPhoto{
     public let id: Int
     public let url: String
     public let activityId: Int
+    public let seperateId:Int
     public var downloaded: Bool
     public var size:CGSize
     
-    init(dictionary : NSDictionary, activityId: Int) {
+    init(dictionary : NSDictionary, activityId: Int, seperateId:Int) {
         if let id = dictionary["id"] as? NSNumber {
             self.id = id as Int
         } else {
@@ -29,6 +30,7 @@ public class ActivityPhoto{
             self.url = "无"
         }
         self.activityId = activityId
+        self.seperateId = seperateId
         
         self.downloaded = false;
         self.size = CGSize()
@@ -40,32 +42,5 @@ public class ActivityPhoto{
     
     public func toCacheKey() -> String {
         return "\(id).jpg"
-    }
-    
-    public func downloadPhoto(action :(() -> Void)){
-        let cache = Shared.imageCache
-
-        let cacheKey = self.toCacheKey()
-        println("start download \(self.id)")
-        cache.fetch(key: cacheKey).onSuccess { image in
-            self.downloaded = true
-            self.size = image.size
-            println("\(self.id) (From cache) :\(cacheKey)")
-            action()
-        }.onFailure {failer in
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED,0)) { () -> Void in
-                if let imageURL = NSURL(fileURLWithPath: self.url) {
-                    if let imageData = NSData(contentsOfURL: NSURL(string: self.url)!){
-                        let image = UIImage(data:imageData)
-                        cache.set(value: image!, key: cacheKey)
-                        self.downloaded = true
-                        self.size = image!.size
-                        println("\(self.id) (Downloaded) : \(cacheKey)")
-                        action()
-                    }
-                }
-            }
-        }
-
     }
 }

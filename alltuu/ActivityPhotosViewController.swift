@@ -36,7 +36,10 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     var content_y =  CGFloat()
     
     override func viewWillAppear(animated: Bool) {
-        
+        super.viewWillAppear(animated)
+        if activityTitle != nil {
+            self.navigationView!.setTitle(activityTitle!)
+        }
     }
     
     func resetData(){
@@ -55,12 +58,12 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         
         self.seperateBarView.seperateSwitchDelegate = self      //seperate switch
         
-        self.waterfallView.toLoadMoreAction( { () -> () in
+        self.waterfallView.initLoadMoreFootView( { () -> () in
             self.delay(0.5, closure: { () -> () in})
             self.delay(0.5, closure: { () -> () in
                 self.getPhotos()
             })
-        })
+        }, noMoreText: "没有更多照片啦~")
         
         self.getSeperates()
     }
@@ -77,13 +80,9 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         return photos[section].count
     }
     
-    private struct StoryBoard{
-        static let CellReuseIdentifier = "ActivityPhoto"
-    }
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(StoryBoard.CellReuseIdentifier, forIndexPath: indexPath) as! ActivityPhotoCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AtIdentifies.ActivityPhotoCell.rawValue, forIndexPath: indexPath) as! ActivityPhotoCell
         
         cell.photo = self.photos[indexPath.section][indexPath.item]
         
@@ -92,24 +91,23 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     
     
-    //UICollectionViewDeleoverride gate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ActivityPhotoCell
-        cell.photoView.hidden = true
-        
-        println("\(self.waterfallView.frame.origin.y)")
-        var baseframe = CGRectMake(cell.frame.origin.x, cell.frame.origin.y-content_y+self.waterfallView.frame.origin.y, cell.frame.size.width, cell.frame.size.height)
-        
-        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:cell.photo!)
-        zoomv.delegate = self
-        zoomv.setCurrImg(cell.photoView.image!)
-        zoomv.show()
-        
-        zoomv.blockClose = {(done:Bool) -> Void in
-            cell.photoView.hidden = false
-        }
-    }
+    //UICollectionViewDele override gate
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        //
+//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ActivityPhotoCell
+//        cell.photoView.hidden = true
+//        
+        //小图在当前屏幕的位置
+//        var baseframe = CGRectMake(cell.frame.origin.x, cell.frame.origin.y-content_y+self.waterfallView.frame.origin.y, cell.frame.size.width, cell.frame.size.height)
+//        println("baseframe:\(baseframe.origin.x)  \(baseframe.origin.y)  \(baseframe.size.width)  \(baseframe.size.height)")
+//        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:cell.photo!)
+//        zoomv.delegate = self
+//        zoomv.setCurrImg(cell.photoView.image!)       //这个是小图 在里面加载大图
+//        zoomv.show()
+//        zoomv.blockClose = {(done:Bool) -> Void in
+//            cell.photoView.hidden = false
+//        }
+//    }
     
     //LSImgZoomViewDelegate
     func lsImgZoomView(close: Bool) {
@@ -133,16 +131,15 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     func getSeperates(){
         if activityId > 0 {
             AtHttpClient().getSeperates(activityId, returnHandler:{ (error:Int, seperates:Array<Seperate>) in
-                println("\(error)")
                 self.seperates = seperates
-                if self.seperateId == 0 {
+                if self.seperates.count > 0{
                     self.seperateId = seperates[0].sepId
+                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                        self.loadSepSelector()
+                    }
+                    self.getPhotos()
+                    self.getPhotographers()
                 }
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    self.loadSepSelector()
-                }
-                self.getPhotos()
-                self.getPhotographers()
             })
         }
     }
@@ -170,6 +167,7 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
             AtHttpClient().getPhotos(activityId, seperateId:seperateId, pageCount:pageCount, currentPage:currentPage, returnHandler:{ (error:Int, seperates:Array<ActivityPhoto>) in
                 self.photos.append(seperates)
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.waterfallView.showFootView()
                     if seperates.count < self.pageCount {
                         self.waterfallView.didLoadAll()
                     } else {
@@ -214,5 +212,12 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? ActivityPhotoCell {
+            if let destController = segue.destinationViewController as? PhotoDetailViewController {
+                destController.photo = cell.photo
+            }
+        }
+    }
 }
 

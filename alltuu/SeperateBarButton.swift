@@ -10,12 +10,6 @@ import UIKit
 
 class SeperateBarButton: UIButton {
     
-    
-    enum ButtonColor:String {
-        case NORMAL = "#F6F6F6"
-        case ACTIVE = "#3DB8BC"
-    }
-    
     enum FontColor:String {
         case NORMAL = "#111111"
         case ACTIVE = "#FFFFFF"
@@ -38,7 +32,7 @@ class SeperateBarButton: UIButton {
         super.init(coder: aDecoder)
     }
     
-    func setBackgroundColor(color:ButtonColor){
+    func setBackgroundColor(color:AtColor){
         self.backgroundColor = UIColor(colorString:color.rawValue)
     }
     
@@ -48,10 +42,10 @@ class SeperateBarButton: UIButton {
     
     func highlight(shouldHighlight:Bool){
         if shouldHighlight {
-            setBackgroundColor(ButtonColor.ACTIVE)
+            setBackgroundColor(AtColor.BlueNormal)
                     self.setTitleColor(UIColor(colorString: FontColor.ACTIVE.rawValue), forState: UIControlState.Normal)
         } else {
-            setBackgroundColor(ButtonColor.NORMAL)
+            setBackgroundColor(AtColor.BackgroundLightGray)
                     self.setTitleColor(UIColor(colorString: FontColor.NORMAL.rawValue), forState: UIControlState.Normal)
         }
     }

@@ -1,28 +1,22 @@
 //
-//  AtCollectionView.swift
-//  提供了LoadMore的方法
+//  AtTableView.swift
 //  alltuu
 //
-//  Created by MAC on 15/9/11.
+//  Created by MAC on 15/9/16.
 //  Copyright (c) 2015年 Alltuu. All rights reserved.
 //
 
 import UIKit
 
-class AtCollectionView: UICollectionView {
+class AtTableView: UITableView {
+    
     var footView:AtLoadMoreFootView?
     
     //MARK: LoadMore
     //上拉加载更多
-    func initLoadMoreFootView(action :(() -> Void), noMoreText:String){
-        self.initLoadMoreFootView(action, defaultText:"上拉加载更多", loadingText:"加载中...", noMoreText:noMoreText)
-    }
-    
-    func initLoadMoreFootView(action :(() -> Void), defaultText:String, loadingText:String, noMoreText:String ){
+    func initLoadMoreFootView(action :(() -> Void)){
         footView = AtLoadMoreFootView(action: action, frame: CGRectMake( 0 , UIScreen.mainScreen().bounds.size.height - AtLoadMoreFootView.height, UIScreen.mainScreen().bounds.size.width, AtLoadMoreFootView.height))
-        footView!.defaultText = defaultText
-        footView!.loadingText = loadingText
-        footView!.noMoreText = noMoreText
+        footView!.alpha = 1
     }
     
     func hideFootView(){
@@ -31,6 +25,10 @@ class AtCollectionView: UICollectionView {
     
     func showFootView(){
         self.addSubview(footView!)
+    }
+    
+    func setFootViewNoMoreTitle(title:String){
+        self.footView!.noMoreText = title
     }
     
     //一次加载完毕
@@ -43,4 +41,5 @@ class AtCollectionView: UICollectionView {
         footView!.isEndLoadMore = true
         didLoadMore()
     }
+
 }

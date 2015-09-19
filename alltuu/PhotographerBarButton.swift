@@ -17,6 +17,8 @@ import Foundation
 //
 
 import UIKit
+import Haneke
+
 
 class PhotographerBarButton: UIButton {
     
@@ -43,11 +45,32 @@ class PhotographerBarButton: UIButton {
         photographerAvatarView = UIImageView(frame:CGRect(x: 0,y: 0,width: avatarSize,height: avatarSize))
         photographerAvatarView!.layer.masksToBounds = true
         photographerAvatarView!.layer.cornerRadius = avatarSize/2
-        photographerAvatarView!.hnk_setImageFromURL(NSURL(string:"\(photographer.url)@\(Int(Float(avatarSize)))w")!,success:{ image in
-            self.photographerAvatarView!.image = image
-        },failure:{ failure in
-            println("Fail in loading photographer's avatar : \(failure?.description)")
-        })
+        
+        let cache = Shared.imageCache
+        cache.fetch(key: self.toCacheKey()).onSuccess { image in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.photographerAvatarView!.image = image
+            }
+        }.onFailure {failer in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.photographerAvatarView!.image = UIImage(named: "photographer")
+                }
+                let url = self.photographer!.url
+                // load image
+                if let imageURL = NSURL(fileURLWithPath: url) {
+                    let qos = Int(QOS_CLASS_USER_INITIATED.value)
+                    let q = dispatch_get_global_queue(qos, 0)
+                    dispatch_async(q) { () -> Void in
+                        if let imageData = NSData(contentsOfURL: NSURL(string: "\(url)@\(Int(Float(self.avatarSize))*2)w")!){
+                            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                                self.photographerAvatarView!.image = UIImage(data: imageData)
+                            }
+                            cache.set(value: UIImage(data:imageData)!, key: self.toCacheKey())
+                        }
+                    }
+                }
+        }
+
         self.addSubview(self.photographerAvatarView!)
         
         // Name
@@ -60,7 +83,6 @@ class PhotographerBarButton: UIButton {
         self.addSubview(self.photographerNameLaber!)
 
         self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: photographerAvatarView!.frame.width + marginBetweenAvatarAndName + photographerNameLaber!.frame.width, height: self.frame.height)
-        println(self.frame.width)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -69,5 +91,9 @@ class PhotographerBarButton: UIButton {
     
     func setPosition(x:CGFloat, y:CGFloat){
         self.frame = CGRect(x:x, y:y, width:self.frame.width, height:self.frame.height)
+    }
+    
+    func toCacheKey() -> String{
+        return "PGImage-\(self.photographer!.id)"
     }
 }

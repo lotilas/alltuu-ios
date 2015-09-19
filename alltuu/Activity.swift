@@ -18,6 +18,7 @@ public class Activity {
     }
     
     public let id: NSInteger
+    public let city: String
     public let addr: String
     public let adateDot: String
     public let title: String
@@ -33,6 +34,11 @@ public class Activity {
             self.addr = addr as String
         } else {
             self.addr = "无"
+        }
+        if let city = dictionary["city"] as? NSString {
+            self.city = city as String
+        } else {
+            self.city = "地球村"
         }
         if let adateDot = dictionary["adateDot"] as? NSString {
             self.adateDot = adateDot as String

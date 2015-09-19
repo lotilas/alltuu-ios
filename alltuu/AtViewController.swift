@@ -17,4 +17,27 @@ class AtViewController: UIViewController {
             ),
             dispatch_get_main_queue(), closure)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        checkAtNavigationView()
+    }
+    
+    var navigationView:AtNavigationView?
+    
+    func checkAtNavigationView(){
+        var exist = false
+        for subview in self.view.subviews {
+            if subview is AtNavigationView {
+                exist = true
+                self.navigationView = subview as? AtNavigationView
+            }
+        }
+        if !exist {
+            var navigationView = AtNavigationView(navigationViewFrame: self.navigationController!.navigationBar.frame)
+            self.navigationController?.navigationBar.addSubview(navigationView)
+            self.navigationView = navigationView
+        }
+    }
 }

@@ -13,8 +13,9 @@ class PhotographerBarView: UIScrollView {
     let barHeight:CGFloat = 54
     let buttomMargin:CGFloat = 15
     let marginTop:CGFloat = 9
+    let initX:CGFloat = 12
     
-    var currentWidth:CGFloat = 12
+    var currentWidth:CGFloat = 0
     
     var buttonGroup = Array<PhotographerBarButton>()
     
@@ -22,6 +23,7 @@ class PhotographerBarView: UIScrollView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        currentWidth = initX
         self.layer.borderWidth = 1;
         self.layer.borderColor = UIColor(colorString: "#E3E3E3").CGColor
         self.layer.backgroundColor = UIColor(colorString: "#F6F6F6").CGColor
@@ -39,7 +41,7 @@ class PhotographerBarView: UIScrollView {
     }
     
     func removeAllPhotographers(){
-        currentWidth = 0
+        currentWidth = initX
         for subview in self.subviews {
             subview.removeFromSuperview()
         }

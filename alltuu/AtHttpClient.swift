@@ -12,10 +12,6 @@ import Haneke
 
 public class AtHttpClient {
     
-    static let AN_HOUR:NSTimeInterval = 60*60
-    static let A_DAY:NSTimeInterval = 24*60*60
-    static let A_WEEK:NSTimeInterval = 7*24*60*60
-    
     // MARK: 基础方法
     func httpGetWithURL(url:String, successHandler:(NSDictionary) -> Void) {
         var request = HTTPTask()
@@ -34,7 +30,7 @@ public class AtHttpClient {
     }
     
     // 带缓存
-    func httpGetWithURLAndCache(url:String, cacheKey:String, cacheExpire:NSTimeInterval = AtHttpClient.A_DAY, successHandler:(NSDictionary?) -> Void) {
+    func httpGetWithURLAndCache(url:String, cacheKey:String, cacheExpire:NSTimeInterval = AtCacheManager.A_DAY, successHandler:(NSDictionary?) -> Void) {
         let cache = Shared.dataCache
         let cacheManager = AtCacheManager()
         cacheManager.isCacheValid(cacheKey, returnHandler: { result in
@@ -99,7 +95,7 @@ public class AtHttpClient {
     
     // 获取划分 WITH CACHE! for One Hour!
     func getSeperates(activityId:Int, returnHandler:(error:Int, seperates:Array<Seperate>) ->Void){
-        self.httpGetWithURLAndCache("http://m.alltuu.com/activity/sep/\(activityId)", cacheKey:"SEPs-\(activityId)", cacheExpire:60*60, successHandler: { (dataDict:
+        self.httpGetWithURLAndCache("http://m.alltuu.com/activity/sep/\(activityId)", cacheKey:"SEPs-\(activityId)", cacheExpire:AtCacheManager.AN_HOUR, successHandler: { (dataDict:
             NSDictionary?) in
             if let dict = dataDict {
                 if let errorCode:Int = dict["errorCode"] as? Int{
@@ -124,7 +120,7 @@ public class AtHttpClient {
     
     //获取照片 WITH CACHE! for one hour
     func getPhotos(activityId:Int, seperateId:Int, pageCount:Int, currentPage:Int, returnHandler:(error:Int, photos:Array<ActivityPhoto>) -> Void){
-        self.httpGetWithURLAndCache("http://m.alltuu.com/activity/show/\(activityId)/\(seperateId)/\(pageCount)/\(currentPage)", cacheKey:"Photos-\(activityId)-\(seperateId)-\(pageCount)-\(currentPage)", cacheExpire:60*60, successHandler: { (dataDict:NSDictionary?) in
+        self.httpGetWithURLAndCache("http://m.alltuu.com/activity/show/\(activityId)/\(seperateId)/\(pageCount)/\(currentPage)", cacheKey:"Photos-\(activityId)-\(seperateId)-\(pageCount)-\(currentPage)", cacheExpire:AtCacheManager.AN_HOUR, successHandler: { (dataDict:NSDictionary?) in
             if let dict = dataDict {
                 if let errorCode:Int = dict["errorCode"] as? Int{
                     if errorCode != 0 {
@@ -146,7 +142,7 @@ public class AtHttpClient {
     
     //获取摄影师
     func getPhotographers(seperateId:Int, returnHandler:(error:Int, photos:Array<Photographer>) -> Void){
-        self.httpGetWithURLAndCache("http://m.alltuu.com/activity/sep/pgs/\(seperateId)", cacheKey:"SEPPGs-\(seperateId)", cacheExpire:7*24*60*60, successHandler: { (dataDict:NSDictionary?) in
+        self.httpGetWithURLAndCache("http://m.alltuu.com/activity/sep/pgs/\(seperateId)", cacheKey:"SEPPGs-\(seperateId)", cacheExpire:AtCacheManager.A_WEEK, successHandler: { (dataDict:NSDictionary?) in
             if let dict = dataDict {
                 if let errorCode:Int = dict["errorCode"] as? Int{
                     if errorCode != 0 {
@@ -189,7 +185,7 @@ public class AtHttpClient {
     
     // 查询照片详情
     func getPhotoDetail(id:Int, activityId:Int, seperateId:Int, returnHandler:(error:Int, photo:PhotoDetail?) -> Void){
-        self.httpGetWithURLAndCache("http://m.alltuu.com/photo/\(activityId)/\(seperateId)/\(id)/0", cacheKey:"PHOTO-\(activityId)-\(seperateId)-\(id)", cacheExpire:AtHttpClient.A_WEEK, successHandler: { (dataDict:NSDictionary?) in
+        self.httpGetWithURLAndCache("http://m.alltuu.com/photo/\(activityId)/\(seperateId)/\(id)/0", cacheKey:"PHOTO-\(activityId)-\(seperateId)-\(id)", cacheExpire:AtCacheManager.A_WEEK, successHandler: { (dataDict:NSDictionary?) in
             if let dict = dataDict {
                 if let errorCode:Int = dict["errorCode"] as? Int{
                     if errorCode != 0 {
@@ -210,7 +206,7 @@ public class AtHttpClient {
     
     // 查询摄影师详情
     func getPhotographer(proId:Int, returnHandler:(error:Int, photographer:Photographer?) -> Void){
-        self.httpGetWithURLAndCache("http://m.alltuu.com/pg/\(proId)", cacheKey:"PG-\(proId)", cacheExpire:AtHttpClient.AN_HOUR, successHandler: { (dataDict:NSDictionary?) in
+        self.httpGetWithURLAndCache("http://m.alltuu.com/pg/\(proId)", cacheKey:"PG-\(proId)", cacheExpire:AtCacheManager.AN_HOUR, successHandler: { (dataDict:NSDictionary?) in
             if let dict = dataDict {
                 if let errorCode:Int = dict["errorCode"] as? Int{
                     var photographer:Photographer?

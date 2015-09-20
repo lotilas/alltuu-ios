@@ -47,6 +47,11 @@ class ActivitySearchViewController: AtViewController, UISearchBarDelegate, UITab
         })
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationView!.setTitle("活动查找")
+    }
+    
     // tableView datasource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return activities[section].count

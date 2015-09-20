@@ -50,6 +50,6 @@ public class Photographer {
     }
     
     public func toCacheKey() -> String {
-        return "\(id).jpg"
+        return "IMG-PG-\(id)"
     }
 }

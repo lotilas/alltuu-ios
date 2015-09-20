@@ -73,6 +73,9 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-KK-ffJ">
+                                                    <rect key="frame" x="142" y="0.0" width="39" height="39"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -263,6 +266,7 @@
                                             <outlet property="activityAddr" destination="Ttq-kd-bHp" id="o11-tM-fgc"/>
                                             <outlet property="activityImage" destination="hNO-oT-kyb" id="VdI-xl-EVc"/>
                                             <outlet property="activityTitle" destination="FXi-Zn-KNS" id="HYG-ZQ-U7b"/>
+                                            <outlet property="lockView" destination="VfK-KK-ffJ" id="78W-qy-f83"/>
                                             <segue destination="UWI-p3-lyh" kind="show" identifier="ToActivityDetail" id="DNj-Dc-oJP"/>
                                         </connections>
                                     </collectionViewCell>
@@ -418,6 +422,13 @@
                                                                 <constraint firstAttribute="centerX" secondItem="deY-e8-1VL" secondAttribute="centerX" id="R4q-xR-Ga1"/>
                                                             </constraints>
                                                         </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="Qmv-sY-N3g">
+                                                            <rect key="frame" x="239" y="0.0" width="39" height="39"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="39" id="P2H-6V-7D3"/>
+                                                                <constraint firstAttribute="width" constant="39" id="xdu-Lf-OLx"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" red="0.90588235289999997" green="0.0" blue="0.033577454020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -427,10 +438,12 @@
                                                         <constraint firstAttribute="bottom" secondItem="b80-Uq-iDv" secondAttribute="bottom" constant="8" id="9tr-7V-fHS"/>
                                                         <constraint firstAttribute="centerX" secondItem="b80-Uq-iDv" secondAttribute="centerX" constant="-132" id="A53-vw-caV"/>
                                                         <constraint firstItem="QsM-50-9vq" firstAttribute="top" secondItem="D8X-Mj-9CB" secondAttribute="top" id="ASD-89-aJ5"/>
+                                                        <constraint firstItem="Qmv-sY-N3g" firstAttribute="top" secondItem="QsM-50-9vq" secondAttribute="top" id="Djd-Ai-m53"/>
                                                         <constraint firstItem="b80-Uq-iDv" firstAttribute="leading" secondItem="QsM-50-9vq" secondAttribute="trailing" constant="8" id="KX3-Ra-1pS"/>
                                                         <constraint firstAttribute="trailing" secondItem="b80-Uq-iDv" secondAttribute="trailing" constant="8" id="Kdf-7r-kgn"/>
                                                         <constraint firstItem="b80-Uq-iDv" firstAttribute="top" secondItem="D8X-Mj-9CB" secondAttribute="top" constant="8" id="L4d-h8-cZ7"/>
                                                         <constraint firstAttribute="bottom" secondItem="QsM-50-9vq" secondAttribute="bottom" id="XbH-oQ-pNv"/>
+                                                        <constraint firstItem="Qmv-sY-N3g" firstAttribute="trailing" secondItem="QsM-50-9vq" secondAttribute="trailing" id="bRw-lv-zkG"/>
                                                         <constraint firstAttribute="bottom" secondItem="QsM-50-9vq" secondAttribute="bottom" id="hzW-k5-jfr"/>
                                                         <constraint firstItem="QsM-50-9vq" firstAttribute="leading" secondItem="D8X-Mj-9CB" secondAttribute="leading" id="jFF-vx-ydD"/>
                                                         <constraint firstAttribute="trailing" secondItem="QsM-50-9vq" secondAttribute="trailing" constant="320" id="mF6-qT-JBj"/>
@@ -459,6 +472,7 @@
                                         <connections>
                                             <outlet property="activityImageView" destination="QsM-50-9vq" id="j7m-8Z-CFC"/>
                                             <outlet property="cellContentView" destination="D8X-Mj-9CB" id="dfL-hs-KLr"/>
+                                            <outlet property="lockView" destination="Qmv-sY-N3g" id="tP5-Cb-Eev"/>
                                             <outlet property="subtitleLabel" destination="1HK-3o-hoP" id="GWH-Tj-MDR"/>
                                             <outlet property="titleLabel" destination="N0k-J9-aDW" id="Rv2-EH-0Iv"/>
                                             <segue destination="UWI-p3-lyh" kind="show" identifier="ToSearchActivityDetail" id="GdQ-jL-yW9"/>
@@ -628,7 +642,7 @@
                                     <constraint firstAttribute="height" constant="54" id="rnQ-cx-RTb"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3Y-ca-exp">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="z3Y-ca-exp">
                                 <rect key="frame" x="0.0" y="64" width="600" height="482"/>
                             </scrollView>
                         </subviews>
@@ -724,6 +738,9 @@
             <point key="canvasLocation" x="-555" y="-438"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lock" width="67" height="72"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GdQ-jL-yW9"/>
     </inferredMetricsTieBreakers>

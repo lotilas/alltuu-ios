@@ -46,30 +46,7 @@ class PhotographerBarButton: UIButton {
         photographerAvatarView!.layer.masksToBounds = true
         photographerAvatarView!.layer.cornerRadius = avatarSize/2
         
-        let cache = Shared.imageCache
-        cache.fetch(key: self.toCacheKey()).onSuccess { image in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.photographerAvatarView!.image = image
-            }
-        }.onFailure {failer in
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    self.photographerAvatarView!.image = UIImage(named: "photographer")
-                }
-                let url = self.photographer!.url
-                // load image
-                if let imageURL = NSURL(fileURLWithPath: url) {
-                    let qos = Int(QOS_CLASS_USER_INITIATED.value)
-                    let q = dispatch_get_global_queue(qos, 0)
-                    dispatch_async(q) { () -> Void in
-                        if let imageData = NSData(contentsOfURL: NSURL(string: "\(url)@\(Int(Float(self.avatarSize))*2)w")!){
-                            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                                self.photographerAvatarView!.image = UIImage(data: imageData)
-                            }
-                            cache.set(value: UIImage(data:imageData)!, key: self.toCacheKey())
-                        }
-                    }
-                }
-        }
+        photographerAvatarView!.loadImageThroughCache("\(self.photographer!.url)@\(Int(Float(self.avatarSize))*2)w", placeHolder:"photographer", cacheKey: self.photographer!.toCacheKey(), cacheExpire: AtCacheManager.A_MINUTE*2)
 
         self.addSubview(self.photographerAvatarView!)
         

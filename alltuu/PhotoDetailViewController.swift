@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController {
+class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDelegate{
     
     // 中心部分的scroll
     @IBOutlet weak var imageScrollView: UIScrollView!
@@ -21,7 +21,6 @@ class PhotoDetailViewController: UIViewController {
         }
         set {
             detailImageView!.image = newValue
-            detailImageView!.sizeToFit()
         }
     }
     var contentGroupView:UIView?
@@ -51,6 +50,9 @@ class PhotoDetailViewController: UIViewController {
     // 前一个页面传进来的参数
     var photo:ActivityPhoto?
     
+    // tap
+    var tapRecognizer:UITapGestureRecognizer?
+    
     let cardInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     let cardTopBarHeight:CGFloat = 52
     let cardBottomBarHeight:CGFloat = 42
@@ -72,8 +74,12 @@ class PhotoDetailViewController: UIViewController {
         contentGroupView!.layer.borderColor = UIColor(colorString: AtColor.BorderLightGray.rawValue).CGColor
         
         // image view init
+        detailImageView?.removeGestureRecognizer(tapRecognizer!)
         detailImageView = UIImageView(frame: CGRect(x:-cardInsets.left, y:cardTopBarHeight, width:contentGroupView!.frame.width, height:self.imageScrollView!.frame.height))
         detailImageView!.contentMode = UIViewContentMode.ScaleAspectFit
+        tapRecognizer = UITapGestureRecognizer(target: self, action: "openZoomView")
+        detailImageView!.addGestureRecognizer(tapRecognizer!)
+        detailImageView!.userInteractionEnabled = true
         
         // follow button
         followButton = FollowPhotographerButton()
@@ -102,14 +108,14 @@ class PhotoDetailViewController: UIViewController {
     }
     
     func getImage() {
-        self.detailImageView!.hnk_setImageFromURL(NSURL(string: self.photoDetail!.smallUrl)!, success: { image in
+        self.detailImageView!.hnk_setImageFromURL(NSURL(string: self.photoDetail!.url)!, success: { image in
             dispatch_async(dispatch_get_main_queue()){
                 // 等比缩放计算
                 let calculatedWidth = self.detailImageView!.frame.width
                 let calculatedHeight = image.size.height * self.detailImageView!.frame.width / image.size.width
                 // 设置图片 更新frame
                 self.detailImageView!.frame = CGRect(x:self.detailImageView!.frame.origin.x, y:self.detailImageView!.frame.origin.y,width:self.imageScrollView.frame.width, height:calculatedHeight)
-                self.detailImageView!.image = image
+                self.detailImageUImage = image
                 
                 // 更新 contentView frame
                 let oldFrame = self.contentGroupView!.frame
@@ -128,5 +134,29 @@ class PhotoDetailViewController: UIViewController {
             self.photographerAvatar!.frame = CGRect(x:oldFrame.origin.x + self.topBarInsets.left, y:oldFrame.origin.y + self.topBarInsets.top, width:oldFrame.width, height:oldFrame.height)
             self.contentGroupView!.addSubview(self.photographerAvatar!)
         }
+    }
+    
+    func lsImgZoomView(close:Bool){
+        
+    }
+
+    
+    func openZoomView(){
+        
+        var imgsize = self.detailImageUImage!.size
+        var frameHeight = imgsize.height * self.view.frame.width / imgsize.width
+        var frameY = (self.view.frame.height - imgsize.height) / 2
+        var baseframe = CGRect(x:0,y: frameY, width:self.view.frame.width, height:frameHeight)
+        
+        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:self.photoDetail!)
+        zoomv.delegate = self
+        zoomv.setCurrImg(self.detailImageView!.image!)
+        zoomv.show()
+        
+        zoomv.blockClose = {(done:Bool) -> Void in
+            //
+            self.detailImageView!.hidden = false
+        }
+
     }
 }

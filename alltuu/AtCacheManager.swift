@@ -10,7 +10,11 @@ import Foundation
 import Haneke
 
 class AtCacheManager {
-    let NEVER_EXPIRE = "ETERNAL"
+    static let NEVER_EXPIRE = "ETERNAL"
+    static let A_MINUTE:NSTimeInterval = 60
+    static let AN_HOUR:NSTimeInterval = 60*60
+    static let A_DAY:NSTimeInterval = 24*60*60
+    static let A_WEEK:NSTimeInterval = 7*24*60*60
     
     static var formatter = NSDateFormatter()
     
@@ -26,7 +30,7 @@ class AtCacheManager {
 //            println("NO SUCH KEY:\(key  )")
             returnHandler(false)
         }.onSuccess{ string in
-            if string == self.NEVER_EXPIRE {
+            if string == AtCacheManager.NEVER_EXPIRE {
 //                println("ETERNAL:\(key)")
                 returnHandler(true)
             } else {

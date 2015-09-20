@@ -16,6 +16,8 @@ class ActivitySearchCell: UITableViewCell {
 
     @IBOutlet weak var subtitleLabel: UILabel!
     
+    @IBOutlet weak var lockView: UIImageView!
+    
     @IBOutlet weak var cellContentView: UIImageView!
     var activity:Activity? {
         didSet {
@@ -29,6 +31,11 @@ class ActivitySearchCell: UITableViewCell {
         self.activityImageView.image = UIImage(named: "loading.jpg")
         cellContentView.layer.borderWidth = 1
         cellContentView.layer.borderColor = UIColor(colorString: "#DDDDDD").CGColor
+        if (self.activity!.needPassword) {
+            self.lockView.alpha = 1.0
+        } else {
+            self.lockView.alpha = 0.0
+        }
         self.layer.backgroundColor = UIColor(colorString: "#F0F0F0").CGColor
         titleLabel.text = activity!.title
         subtitleLabel.text = "\(activity!.adateDot) | \(activity!.city)"

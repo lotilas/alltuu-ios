@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum PhotoSize:String {
+    case ORIGIN = "ORIGIN"
+    case SMALL = "SMALL"
+}
+
 public class PhotoDetail {
     public let id: Int
     public let smallUrl: String
@@ -53,5 +58,9 @@ public class PhotoDetail {
         } else {
             self.cmtTimes = 0
         }
+    }
+    
+    public func toCacheKey(imgSize:PhotoSize) -> String {
+        return "IMG-PHOTO-\(id)-\(imgSize.rawValue)"
     }
 }

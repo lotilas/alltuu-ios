@@ -18,6 +18,7 @@ public class ActivityCell: UICollectionViewCell {
     
     @IBOutlet weak var activityAddr: UILabel!
     
+    @IBOutlet weak var lockView: UIImageView!
     
     
     public var activity : Activity? {
@@ -37,9 +38,9 @@ public class ActivityCell: UICollectionViewCell {
         activityTitle.text = activity!.title
         activityAddr.text = activity!.addr
         if activity!.needPassword {
-            activityImage.alpha = 0.5
+            lockView.alpha = 1.0
         } else {
-            activityImage.alpha = 1.0
+            lockView.alpha = 0.0
         }
                 
         let cacheKey = activity!.toCachedKey()
@@ -47,10 +48,11 @@ public class ActivityCell: UICollectionViewCell {
         cache.fetch(key: cacheKey).onSuccess { image in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.activityImage.image = image
+                
             }
         }.onFailure {failer in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.activityImage.image = UIImage(named: "loading.jpg")
+                self.activityImage.image = nil
             }
         
             let urlStr = "http://pub.alltuu.com/act/\(self.activity!.id)-o.jpg@1e_320w_240h_1c_0i_1o_90Q_1x.jpg"

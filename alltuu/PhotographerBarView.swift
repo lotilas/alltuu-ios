@@ -42,8 +42,10 @@ class PhotographerBarView: UIScrollView {
     
     func removeAllPhotographers(){
         currentWidth = initX
-        for subview in self.subviews {
-            subview.removeFromSuperview()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            for subview in self.subviews {
+                subview.removeFromSuperview()
+            }
         }
     }
 }

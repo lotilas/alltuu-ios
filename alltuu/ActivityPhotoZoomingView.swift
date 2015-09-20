@@ -35,12 +35,12 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     //初始大小位置
     var base_frame = CGRect()
     
-    var photo:ActivityPhoto?
+    var photo:PhotoDetail?
     
     //block返回
     var blockClose:closeBlock?
     
-    init(baseframe: CGRect, p:ActivityPhoto) {
+    init(baseframe: CGRect, p:PhotoDetail) {
         //
         super.init(frame: baseframe)
         
@@ -49,16 +49,17 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         base_frame = baseframe
         
         self.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.blackColor()
         
         //
         rootview = UIScrollView(frame: self.bounds)
-        rootview!.backgroundColor = UIColor(red: 0.031, green: 0.031, blue: 0.031, alpha: 0)
+        rootview!.backgroundColor = UIColor.clearColor()
         rootview!.delegate = self
         rootview!.showsHorizontalScrollIndicator = false
         rootview!.showsVerticalScrollIndicator = false
         rootview!.maximumZoomScale = 2.0
         rootview!.minimumZoomScale = 1.0
+        rootview!.alpha = 0
         self.addSubview(rootview!)
         
         //
@@ -66,33 +67,10 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         zoomview!.userInteractionEnabled = true
         zoomview!.contentMode = UIViewContentMode.ScaleAspectFill
         zoomview!.clipsToBounds = true
-        zoomview!.backgroundColor = UIColor.lightGrayColor()
+        zoomview!.backgroundColor = UIColor.blackColor()
         rootview!.addSubview(zoomview!)
-        
-        var request = HTTPTask()
-        request.GET("http://m.alltuu.com/photo/\(self.photo!.activityId)/\(self.photo!.seperateId)/\(self.photo!.id)/0", parameters: nil, completionHandler: {(response: HTTPResponse) in
-            if let err = response.error {
-                println("error: \(err.localizedDescription)")
-                return
-            }
-            let data = response.responseObject as! NSData
-            let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-            var array = [Seperate]()
-            if let lists : NSArray = dict["lists"] as? NSArray{
-                if let info : NSDictionary = lists[0] as? NSDictionary{
-                    self.zoomview?.hnk_setImageFromURL(NSURL(string:info["url"] as! String)!,success:{i in
-                        self.zoomview?.image = i
-                    },failure:{j in
-                        println("F : \(j?.description)")
-                    })
-                }
-            }
-        })
-        
-        
-        
-       
-
+     
+        zoomview!.loadImageThroughCache(self.photo!.smallUrl, cacheKey: p.toCacheKey(PhotoSize.SMALL), cacheExpire: AtCacheManager.A_WEEK)
         
         //双击事件
         
@@ -109,6 +87,10 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         rootview!.addGestureRecognizer(closeTap)
     }
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     //传递一张图片
     func setCurrImg(img:UIImage){
         //
@@ -121,35 +103,10 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     
     //渐变动画
     func animationOfFrame(){
-        
-        let imgsize = currimg.size
-        
-        var newRect = CGRect()
-        if (self.bounds.size.width * imgsize.height / imgsize.width > self.bounds.size.height){
-            //
-            newRect = CGRectMake(
-                0,
-                0,
-                self.bounds.size.width,
-                self.bounds.size.width*imgsize.height/imgsize.width);
-            self.rootview!.contentSize = CGSizeMake(self.bounds.size.width, self.bounds.size.width*imgsize.height/imgsize.width);
-            
-        }else{
-            //
-            newRect = CGRectMake(
-                0,
-                (self.bounds.size.height-self.bounds.size.width*imgsize.height/imgsize.width)/2,
-                self.bounds.size.width,
-                self.bounds.size.width*imgsize.height/imgsize.width);
-        }
-        
-        //
-        UIView.animateWithDuration(0.35, animations: { () -> Void in
-            //
-            self.zoomview!.frame = newRect
-            self.rootview!.backgroundColor = UIColor(red: 0.031, green: 0.031, blue: 0.031, alpha: 0.75)
-            
-            }) { (done:Bool) -> Void in
+        self.rootview!.backgroundColor = UIColor.blackColor()
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.rootview!.alpha = 1
+        }) { (done:Bool) -> Void in
                 //
                 
         }
@@ -158,7 +115,6 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     
     //展示
     func show(){
-        //
         var app = UIApplication.sharedApplication().delegate as! AppDelegate
         app.window!.addSubview(self)
         
@@ -172,11 +128,11 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         UIView.animateWithDuration(0.35, animations: { () -> Void in
             //
             
-            self.zoomview!.frame = self.base_frame
-            self.rootview!.backgroundColor = UIColor(red: 0.031, green: 0.031, blue: 0.031, alpha: 0)
+//            self.zoomview!.frame = self.base_frame
+//            self.rootview!.backgroundColor = UIColor.clearColor()
+            self.rootview!.alpha = 0
             
-            
-            }) { (done: Bool) -> Void in
+        }) { (done: Bool) -> Void in
                 //
                 if (done){
                     self.removeFromSuperview()
@@ -192,23 +148,16 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     
     //双击
     func actionOfDoubleTap(sender:UITapGestureRecognizer!){
-        
-        //
         if (sender.state == UIGestureRecognizerState.Ended){
             if (count == 0){
-                //
                 self.rootview!.setZoomScale(2.0, animated: true)
                 count = 1
-                
             }else{
-                //
                 self.rootview!.setZoomScale(1.0, animated: true)
                 count = 0
             }
         }
     }
-    
-    
     
     //UIScrollViewDelegate
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -229,11 +178,4 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
             self.zoomview!.center = CGPointMake(self.rootview!.contentSize.width*0.5+offsetx, self.rootview!.contentSize.height*0.5+offsety)
         }
     }
-    
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    
 }

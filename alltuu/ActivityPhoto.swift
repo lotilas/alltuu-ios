@@ -41,6 +41,6 @@ public class ActivityPhoto{
     }
     
     public func toCacheKey() -> String {
-        return "\(id).jpg"
+        return "IMG-PHOTO-\(id)"
     }
 }

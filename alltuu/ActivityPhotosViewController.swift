@@ -146,6 +146,7 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     //摄影师
     func getPhotographers(){
+        photographerBarView.removeAllPhotographers()
         if seperateId > 0 {
             AtHttpClient().getPhotographers(seperateId, returnHandler: { (error:Int, photographers:Array<Photographer>) in
                 self.photographers = photographers
@@ -189,7 +190,6 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     }
     
     func loadPhotographers(){
-        photographerBarView.removeAllPhotographers()
         for photographer in photographers {
             var btn:PhotographerBarButton = PhotographerBarButton(photographer: photographer)
             photographerBarView.addSubview(btn)

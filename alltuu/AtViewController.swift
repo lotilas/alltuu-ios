@@ -9,6 +9,7 @@
 import UIKit
 
 class AtViewController: UIViewController {
+    
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time(
@@ -20,8 +21,16 @@ class AtViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        //改变按钮颜色
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        //改变状态栏字体颜色
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent,animated: false)
+        //改变整体背景颜色
         checkAtNavigationView()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
     
     var navigationView:AtNavigationView?
@@ -35,7 +44,7 @@ class AtViewController: UIViewController {
             }
         }
         if !exist {
-            var navigationView = AtNavigationView(navigationViewFrame: self.navigationController!.navigationBar.frame)
+            var navigationView = AtNavigationView(navigationViewFrame: self.navigationController!.navigationBar.frame, statusBarFrame:UIApplication.sharedApplication().statusBarFrame)
             self.navigationController?.navigationBar.addSubview(navigationView)
             self.navigationView = navigationView
         }

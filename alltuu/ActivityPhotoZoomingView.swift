@@ -23,7 +23,7 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     var delegate: ActivityPhotoZoomingViewDelegate?
     
     //当前图片
-    var currimg = UIImage()
+    var currimg:UIImage?
     
     //
     var rootview: UIScrollView?
@@ -40,13 +40,15 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     //block返回
     var blockClose:closeBlock?
     
-    init(baseframe: CGRect, p:PhotoDetail) {
+    init(baseframe: CGRect, p:PhotoDetail, image:UIImage) {
         //
         super.init(frame: baseframe)
         
         self.photo = p
         
         base_frame = baseframe
+        
+        self.currimg = image
         
         self.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
         self.backgroundColor = UIColor.blackColor()
@@ -70,7 +72,7 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         zoomview!.backgroundColor = UIColor.blackColor()
         rootview!.addSubview(zoomview!)
      
-        zoomview!.loadImageThroughCache(self.photo!.smallUrl, cacheKey: p.toCacheKey(PhotoSize.SMALL), cacheExpire: AtCacheManager.A_WEEK)
+        zoomview!.loadImageThroughCache(self.photo!.smallUrl, placeHolder:self.currimg!,cacheKey: p.toCacheKey(PhotoSize.SMALL), cacheExpire: AtCacheManager.A_WEEK)
         
         //双击事件
         

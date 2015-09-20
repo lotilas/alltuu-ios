@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		821E32771BA2CD0C004C2EA4 /* AtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E32761BA2CD0C004C2EA4 /* AtViewController.swift */; };
+		825583A41BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825583A31BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift */; };
 		8263F5801BAD63D700432E7B /* AtImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F57F1BAD63D700432E7B /* AtImageViewExtension.swift */; };
+		82694DEC1BAF0066002E11D3 /* PhotoDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */; };
 		829077211BA82427006C0159 /* AtColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077201BA82427006C0159 /* AtColor.swift */; };
 		829077231BA827B3006C0159 /* NavigationBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077221BA827B3006C0159 /* NavigationBackgroundView.swift */; };
 		829077251BA936DB006C0159 /* ActivitySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077241BA936DB006C0159 /* ActivitySearchCell.swift */; };
@@ -79,7 +81,9 @@
 		0680613B53CF69D1D4C416C0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37237399CD62F383A56A9519 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		821E32761BA2CD0C004C2EA4 /* AtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtViewController.swift; sourceTree = "<group>"; };
+		825583A31BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailPagingDelegate.swift; sourceTree = "<group>"; };
 		8263F57F1BAD63D700432E7B /* AtImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtImageViewExtension.swift; sourceTree = "<group>"; };
+		82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailCard.swift; sourceTree = "<group>"; };
 		829077201BA82427006C0159 /* AtColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AtColor.swift; path = ../AtColor.swift; sourceTree = "<group>"; };
 		829077221BA827B3006C0159 /* NavigationBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackgroundView.swift; sourceTree = "<group>"; };
 		829077241BA936DB006C0159 /* ActivitySearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySearchCell.swift; sourceTree = "<group>"; };
@@ -163,6 +167,14 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
+		825583A21BAEC8CF00C2CFDC /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				825583A31BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift */,
+			);
+			name = delegates;
+			sourceTree = "<group>";
+		};
 		8263F5811BAD66B900432E7B /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +221,7 @@
 				82AA65E01BA6E5D300B4BD01 /* SeperateBarButton.swift */,
 				82E927691BAAEF62002878F5 /* AtPhotoPropertyView.swift */,
 				82D76CBC1BAC26B60051D27E /* FollowPhotographerButton.swift */,
+				82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -251,6 +264,7 @@
 			children = (
 				8290772D1BA958DA006C0159 /* controllers */,
 				8290772C1BA9589C006C0159 /* views */,
+				825583A21BAEC8CF00C2CFDC /* delegates */,
 				82F1B3961BA17D8600B4E8F7 /* entity */,
 				821E327A1BA2D638004C2EA4 /* utils */,
 				8263F5811BAD66B900432E7B /* extensions */,
@@ -463,6 +477,7 @@
 			files = (
 				82E9276A1BAAEF62002878F5 /* AtPhotoPropertyView.swift in Sources */,
 				82BF11D31BA7C6240042438D /* PhotographerBarButton.swift in Sources */,
+				825583A41BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift in Sources */,
 				82F1B3A21BA288D500B4E8F7 /* ActivityPhotoZoomingView.swift in Sources */,
 				821E32771BA2CD0C004C2EA4 /* AtViewController.swift in Sources */,
 				82F1B3461BA02D4700B4E8F7 /* Activity.swift in Sources */,
@@ -487,6 +502,7 @@
 				82A0A6D11BA2A80E005AD107 /* ActivityPhotosView.swift in Sources */,
 				829077371BAA8B1D006C0159 /* PhotoDetailViewController.swift in Sources */,
 				82F1B31E1BA02BC000B4E8F7 /* AppDelegate.swift in Sources */,
+				82694DEC1BAF0066002E11D3 /* PhotoDetailCard.swift in Sources */,
 				82F1B3471BA02D4700B4E8F7 /* ActivityCell.swift in Sources */,
 				82AA65DF1BA6D6F500B4BD01 /* UIColorExtensions.swift in Sources */,
 				82A0A6C51BA2A4F6005AD107 /* ActivityPhoto.swift in Sources */,

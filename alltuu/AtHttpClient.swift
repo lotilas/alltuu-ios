@@ -38,8 +38,9 @@ public class AtHttpClient {
             if result {
                 var dataDict:NSDictionary?
                 cache.fetch(key: cacheKey).onSuccess{ data in
-                    dataDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary
-                    successHandler(dataDict!)
+                    if let dataDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary {
+                        successHandler(dataDict)
+                    }
                 }.onFailure{ failure in
                     // not expire but fail to fetch it, may be remove from cache
                     self.getFromNetwork(url, cacheKey:cacheKey, cacheExpire:cacheExpire, cache:cache, cacheManager:cacheManager, successHandler:successHandler)
@@ -60,11 +61,13 @@ public class AtHttpClient {
                     println("error: \(err.localizedDescription)")
                     successHandler(nil)
                 } else {
-                    let data = response.responseObject as! NSData
-                    cache.set(value: data, key: cacheKey)
-                    cacheManager.setCacheExpire(cacheKey, expirationIntervalFromNow: cacheExpire)
-                    let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-                    successHandler(dict)
+                    if let data = response.responseObject as? NSData {
+                        cache.set(value: data, key: cacheKey)
+                        cacheManager.setCacheExpire(cacheKey, expirationIntervalFromNow: cacheExpire)
+                        if let dict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary {
+                            successHandler(dict)
+                        }
+                    }
                 }
             })
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDelegate{
+class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDelegate, UIGestureRecognizerDelegate{
     
     // 中心部分的scroll
     @IBOutlet weak var imageScrollView: UIScrollView!
@@ -24,19 +24,13 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
         }
     }
     var contentGroupView:UIView?
-    
     var detailImageView: UIImageView?
-    
-    var image:UIImage?
-    
     var photographerAvatar:PhotographerBarButton?
-    
     var followButton:FollowPhotographerButton?
     
     // 图片详细属性
     var photoDetail:PhotoDetail? {
         didSet {
-            image = nil
             getImage()
         }
     }
@@ -52,6 +46,9 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
     
     // tap
     var tapRecognizer:UITapGestureRecognizer?
+    // swipe
+    var swipeRightRecognizer:UISwipeGestureRecognizer?
+    var swipeLeftRecognizer:UISwipeGestureRecognizer?
     
     let cardInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     let cardTopBarHeight:CGFloat = 52
@@ -60,12 +57,28 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
     
     override func viewDidLoad() {
         setupUI()
+        // 禁用右滑手势
+        self.navigationController!.interactivePopGestureRecognizer.delegate = self
+        self.navigationController!.interactivePopGestureRecognizer.enabled = false
+    }
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer is UIPanGestureRecognizer {
+            return false
+        } else {
+            return true
+        }
     }
     
     func setupUI() {
         self.view.backgroundColor = UIColor(colorString: "#F0F0F0")
         let oldFrame = self.imageScrollView.frame
         self.imageScrollView.frame = CGRect(x:oldFrame.origin.x, y:oldFrame.origin.y, width:self.view.frame.width, height:self.view.frame.height)
+        self.swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: "onPreviousPageSwipe:")
+        self.swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: "onNextPageSwipe:")
+        self.swipeLeftRecognizer!.direction = UISwipeGestureRecognizerDirection.Left
+        self.imageScrollView.addGestureRecognizer(swipeLeftRecognizer!)
+        self.imageScrollView.addGestureRecognizer(swipeRightRecognizer!)
         
         // card view
         contentGroupView = UIView(frame: CGRect(x:cardInsets.left, y:cardInsets.top, width:self.imageScrollView.frame.width - cardInsets.left - cardInsets.right, height:self.imageScrollView.frame.height))
@@ -84,7 +97,6 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
         // follow button
         followButton = FollowPhotographerButton()
         followButton!.setPosition(contentGroupView!.frame.width - followButton!.frame.width - topBarInsets.right, y:topBarInsets.top)
-
         
         contentGroupView!.addSubview(followButton!)
         contentGroupView!.addSubview(detailImageView!)
@@ -136,19 +148,32 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
         }
     }
     
+    func onPreviousPageSwipe(sender:UISwipeGestureRecognizer) {
+        UIView.animateWithDuration(0.5, animations: {
+            var oldCenter = self.contentGroupView!.center
+            self.contentGroupView!.center = CGPoint(x:oldCenter.x+self.view.frame.width,y:oldCenter.y)
+        })
+    }
+    func onNextPageSwipe(sender:UISwipeGestureRecognizer) {
+        UIView.animateWithDuration(0.5, animations: {
+            var oldCenter = self.contentGroupView!.center
+            self.contentGroupView!.center = CGPoint(x:oldCenter.x-self.view.frame.width,y:oldCenter.y)
+        })
+
+    }
+    
     func lsImgZoomView(close:Bool){
         
     }
 
     
     func openZoomView(){
-        
         var imgsize = self.detailImageUImage!.size
         var frameHeight = imgsize.height * self.view.frame.width / imgsize.width
         var frameY = (self.view.frame.height - imgsize.height) / 2
         var baseframe = CGRect(x:0,y: frameY, width:self.view.frame.width, height:frameHeight)
         
-        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:self.photoDetail!)
+        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:self.photoDetail!,image:self.detailImageUImage!)
         zoomv.delegate = self
         zoomv.setCurrImg(self.detailImageView!.image!)
         zoomv.show()

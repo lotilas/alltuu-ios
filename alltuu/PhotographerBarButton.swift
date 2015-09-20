@@ -46,7 +46,7 @@ class PhotographerBarButton: UIButton {
         photographerAvatarView!.layer.masksToBounds = true
         photographerAvatarView!.layer.cornerRadius = avatarSize/2
         
-        photographerAvatarView!.loadImageThroughCache("\(self.photographer!.url)@\(Int(Float(self.avatarSize))*2)w", placeHolder:"photographer", cacheKey: self.photographer!.toCacheKey(), cacheExpire: AtCacheManager.A_MINUTE*2)
+        photographerAvatarView!.loadImageThroughCache("\(self.photographer!.url)@\(Int(Float(self.avatarSize))*2)w", placeHolder:UIImage(named: "photographer"), cacheKey: self.photographer!.toCacheKey(), cacheExpire: AtCacheManager.A_MINUTE*2)
 
         self.addSubview(self.photographerAvatarView!)
         

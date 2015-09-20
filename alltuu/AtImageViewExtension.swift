@@ -10,9 +10,13 @@ import UIKit
 import Haneke
 
 extension UIImageView {
-    func loadImageThroughCache(url:String, placeHolder:String? = nil, cacheKey:String, cacheExpire:NSTimeInterval) {
+    func loadImageThroughCache(url:String, placeHolder:UIImage? = nil, cacheKey:String, cacheExpire:NSTimeInterval) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.image = nil
+            if placeHolder != nil {
+                self.image = placeHolder
+            } else {
+                self.image = nil
+            }
         }
         let cacheManager = AtCacheManager()
         let cache = Shared.imageCache
@@ -24,11 +28,6 @@ extension UIImageView {
                         self.image = image
                     }
                 }.onFailure {failer in
-                    if placeHolder != nil {
-                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                            self.image = UIImage(named: placeHolder!)
-                        }
-                    }
                     // get from network
                     self.loadFromNetwork(url, cache: cache, cacheManager:cacheManager, cacheKey: cacheKey, cacheExpire:cacheExpire)
                 }

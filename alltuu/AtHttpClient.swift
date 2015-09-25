@@ -10,12 +10,18 @@ import Foundation
 import SwiftHTTP
 import Haneke
 
+public enum PhotoDetailStatus : Int {
+    case current = 0
+    case previous = 1
+    case next = 2
+}
+
 public class AtHttpClient {
     
     // MARK: 基础方法
     func httpGetWithURL(url:String, successHandler:(NSDictionary) -> Void) {
         var request = HTTPTask()
-        println("WITHOUT CACHE:\(url)")
+        //println("WITHOUT CACHE:\(url)")
         if let encodedUrl = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
             request.GET(encodedUrl, parameters: nil, completionHandler: {(response: HTTPResponse) in
                 if let err = response.error {
@@ -53,7 +59,7 @@ public class AtHttpClient {
     }
     
     private func getFromNetwork(url:String, cacheKey:String, cacheExpire:NSTimeInterval, cache:Cache<NSData>, cacheManager:AtCacheManager, successHandler:(NSDictionary?) -> Void){
-        println("FROM NETWORK:\(url)")
+        //println("FROM NETWORK:\(url)")
         var request = HTTPTask()
         if let encodedUrl = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
             request.GET(encodedUrl, parameters: nil, completionHandler: {(response: HTTPResponse) in
@@ -186,9 +192,24 @@ public class AtHttpClient {
         })
     }
     
-    // 查询照片详情
-    func getPhotoDetail(id:Int, activityId:Int, seperateId:Int, returnHandler:(error:Int, photo:PhotoDetail?) -> Void){
-        self.httpGetWithURLAndCache("http://m.alltuu.com/photo/\(activityId)/\(seperateId)/\(id)/0", cacheKey:"PHOTO-\(activityId)-\(seperateId)-\(id)", cacheExpire:AtCacheManager.A_WEEK, successHandler: { (dataDict:NSDictionary?) in
+    // 查询id所指照片详情
+    func getCurrentPhotoDetail(id:Int, activityId:Int, seperateId:Int, returnHandler:(error:Int, photo:PhotoDetail?) -> Void){
+        self.getPhotoDetail(id, activityId: activityId, seperateId: seperateId, status: PhotoDetailStatus.current,returnHandler:returnHandler)
+    }
+    
+    // 查询id所指照片前一张详情 可能不存在
+    func getNextPhotoDetail(id:Int, activityId:Int, seperateId:Int, returnHandler:(error:Int, photo:PhotoDetail?) -> Void){
+        self.getPhotoDetail(id, activityId: activityId, seperateId: seperateId, status: PhotoDetailStatus.next,returnHandler:returnHandler)
+    }
+    
+    // 查询id所指照片前一张详情 可能不存在
+    func getPreviousPhotoDetail(id:Int, activityId:Int, seperateId:Int, returnHandler:(error:Int, photo:PhotoDetail?) -> Void){
+        self.getPhotoDetail(id, activityId: activityId, seperateId: seperateId, status: PhotoDetailStatus.previous,returnHandler:returnHandler)
+    }
+    
+    // 获取照片详情
+    private func getPhotoDetail(id:Int, activityId:Int, seperateId:Int, status:PhotoDetailStatus, returnHandler:(error:Int, photo:PhotoDetail?) -> Void) {
+        self.httpGetWithURLAndCache("http://m.alltuu.com/photo/\(activityId)/\(seperateId)/\(id)/\(status.rawValue)", cacheKey:"PHOTO-\(activityId)-\(seperateId)-\(id)-\(status.rawValue)", cacheExpire:AtCacheManager.A_WEEK, successHandler: { (dataDict:NSDictionary?) in
             if let dict = dataDict {
                 if let errorCode:Int = dict["errorCode"] as? Int{
                     if errorCode != 0 {
@@ -196,8 +217,10 @@ public class AtHttpClient {
                     } else {
                         var photo:PhotoDetail?
                         if let lists : NSArray = dict["lists"] as? NSArray{
-                            if let info : NSDictionary = lists[0] as? NSDictionary{
-                                photo = PhotoDetail(dictionary: info)
+                            if lists.count > 0 {
+                                if let info : NSDictionary = lists[0] as? NSDictionary{
+                                    photo = PhotoDetail(dictionary: info)
+                                }
                             }
                         }
                         returnHandler(error: errorCode, photo:photo)

@@ -32,6 +32,8 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     var titles:Array<String>?
     
+    var currentCellIndexPath:NSIndexPath?
+    
     //相对位置
     var content_y =  CGFloat()
     
@@ -93,20 +95,7 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     //UICollectionViewDele override gate
 //    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        //
-//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ActivityPhotoCell
-//        cell.photoView.hidden = true
-//        
-        //小图在当前屏幕的位置
-//        var baseframe = CGRectMake(cell.frame.origin.x, cell.frame.origin.y-content_y+self.waterfallView.frame.origin.y, cell.frame.size.width, cell.frame.size.height)
-//        println("baseframe:\(baseframe.origin.x)  \(baseframe.origin.y)  \(baseframe.size.width)  \(baseframe.size.height)")
-//        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:cell.photo!)
-//        zoomv.delegate = self
-//        zoomv.setCurrImg(cell.photoView.image!)       //这个是小图 在里面加载大图
-//        zoomv.show()
-//        zoomv.blockClose = {(done:Bool) -> Void in
-//            cell.photoView.hidden = false
-//        }
+//        self.currentCellIndexPath = indexPath
 //    }
     
     //LSImgZoomViewDelegate
@@ -215,7 +204,10 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? ActivityPhotoCell {
             if let destController = segue.destinationViewController as? PhotoDetailViewController {
-                destController.photo = cell.photo
+                destController.photoId = cell.photo!.id
+                destController.activityId = cell.photo!.activityId
+                destController.seperateId = cell.photo!.seperateId
+                destController.placeHolderImageMiddle = cell.photoView.image
             }
         }
     }

@@ -27,10 +27,6 @@ public class ActivityCell: UICollectionViewCell {
         }
     }
     
-    public override func removeFromSuperview() {
-//        println("remove")
-    }
-    
     func updateUI(){
         let cache = Shared.imageCache
         
@@ -45,35 +41,6 @@ public class ActivityCell: UICollectionViewCell {
                 
         let cacheKey = activity!.toCachedKey()
         
-        cache.fetch(key: cacheKey).onSuccess { image in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.activityImage.image = image
-                
-            }
-        }.onFailure {failer in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.activityImage.image = nil
-            }
-        
-            let urlStr = "http://pub.alltuu.com/act/\(self.activity!.id)-o.jpg@1e_320w_240h_1c_0i_1o_90Q_1x.jpg"
-            
-            // load image
-            if let imageURL = NSURL(fileURLWithPath: urlStr) {
-                let qos = Int(QOS_CLASS_USER_INITIATED.value)
-                let q = dispatch_get_global_queue(qos, 0)
-                dispatch_async(q) { () -> Void in
-                    if let imageData = NSData(contentsOfURL: NSURL(string: urlStr)!){
-                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-//                            println("\(NSDate()) LOAD END \(self.activity!.id)")
-                            self.activityImage.image = UIImage(data: imageData)
-                        }
-                        cache.set(value: UIImage(data:imageData)!, key: cacheKey)
-                    }
-                }
-            }
-        }
+        self.activityImage.loadImageThroughCache("http://pub.alltuu.com/act/\(self.activity!.id)-o.jpg@1e_320w_240h_1c_0i_1o_90Q_1x.jpg", cacheKey: cacheKey, cacheExpire: AtCacheManager.A_DAY)
     }
-    
-    
-
 }

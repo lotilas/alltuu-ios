@@ -11,6 +11,7 @@ import Foundation
 public enum PhotoSize:String {
     case ORIGIN = "ORIGIN"
     case SMALL = "SMALL"
+    case MIDDLE = "MIDDLE"
 }
 
 public class PhotoDetail {
@@ -61,6 +62,7 @@ public class PhotoDetail {
     }
     
     public func toCacheKey(imgSize:PhotoSize) -> String {
+//        println("SSSSS IMG-PHOTO-\(id)-\(imgSize.rawValue)")
         return "IMG-PHOTO-\(id)-\(imgSize.rawValue)"
     }
 }

@@ -58,6 +58,6 @@ public class Activity {
     }
     
     func toCachedKey() -> String {
-        return "activities/\(id)/cover/cover.jpg"
+        return "IMG-ACT-\(id)"
     }
 }

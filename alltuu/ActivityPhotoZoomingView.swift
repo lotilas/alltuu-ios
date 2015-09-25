@@ -19,9 +19,6 @@ protocol ActivityPhotoZoomingViewDelegate{
 
 class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     
-    //close代理
-    var delegate: ActivityPhotoZoomingViewDelegate?
-    
     //当前图片
     var currimg:UIImage?
     
@@ -36,9 +33,6 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
     var base_frame = CGRect()
     
     var photo:PhotoDetail?
-    
-    //block返回
-    var blockClose:closeBlock?
     
     init(baseframe: CGRect, p:PhotoDetail, image:UIImage) {
         //
@@ -72,10 +66,9 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
         zoomview!.backgroundColor = UIColor.blackColor()
         rootview!.addSubview(zoomview!)
      
-        zoomview!.loadImageThroughCache(self.photo!.smallUrl, placeHolder:self.currimg!,cacheKey: p.toCacheKey(PhotoSize.SMALL), cacheExpire: AtCacheManager.A_WEEK)
+        zoomview!.loadImageThroughCache(self.photo!.smallUrl, placeHolder:self.currimg!,cacheKey: p.toCacheKey(PhotoSize.MIDDLE), cacheExpire: AtCacheManager.A_WEEK)
         
         //双击事件
-        
         let doubleTap = UITapGestureRecognizer(target: self, action: "actionOfDoubleTap:")
         doubleTap.numberOfTapsRequired = 2
         doubleTap.numberOfTouchesRequired = 1
@@ -139,11 +132,6 @@ class ActivityPhotoZoomingView: UIView,UIScrollViewDelegate {
                 if (done){
                     self.removeFromSuperview()
                 }
-                
-                //关闭的代理
-                self.delegate!.lsImgZoomView(true)
-                //
-                self.blockClose!(true)
         }
         
     }

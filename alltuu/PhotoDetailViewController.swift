@@ -8,58 +8,37 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDelegate, UIGestureRecognizerDelegate{
+class PhotoDetailViewController: UIViewController, UIGestureRecognizerDelegate, UIScrollViewDelegate, AtScrollViewDelegate{
     
     // 中心部分的scroll
     @IBOutlet weak var imageScrollView: UIScrollView!
     // 底部的属性按钮组
     @IBOutlet weak var detailPropertyButtonGroup: UIView!
-    // 中间的大图
-    var detailImageUImage:UIImage? {
-        get {
-            return detailImageView!.image
-        }
-        set {
-            detailImageView!.image = newValue
-        }
-    }
-    var contentGroupView:UIView?
-    var detailImageView: UIImageView?
-    var photographerAvatar:PhotographerBarButton?
-    var followButton:FollowPhotographerButton?
     
-    // 图片详细属性
-    var photoDetail:PhotoDetail? {
-        didSet {
-            getImage()
-        }
-    }
-    // 摄影师
-    var photographer:Photographer? {
-        didSet {
-            refreshTopBar()
-        }
-    }
-    
+    var contentGroupViewLeft:PhotoDetailCard?
+    var contentGroupViewMiddle:PhotoDetailCard?
+    var contentGroupViewRight:PhotoDetailCard?
+    var contentGroupViewTemp:PhotoDetailCard?
+
     // 前一个页面传进来的参数
-    var photo:ActivityPhoto?
+    var photoId:Int?
+    var activityId:Int?
+    var seperateId:Int?
+    var placeHolderImageLeft:UIImage?
+    var placeHolderImageMiddle:UIImage?
+    var placeHolderImageRight:UIImage?
     
-    // tap
-    var tapRecognizer:UITapGestureRecognizer?
+    
     // swipe
     var swipeRightRecognizer:UISwipeGestureRecognizer?
     var swipeLeftRecognizer:UISwipeGestureRecognizer?
     
-    let cardInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-    let cardTopBarHeight:CGFloat = 52
-    let cardBottomBarHeight:CGFloat = 42
-    let topBarInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    
     override func viewDidLoad() {
-        setupUI()
         // 禁用右滑手势
         self.navigationController!.interactivePopGestureRecognizer.delegate = self
         self.navigationController!.interactivePopGestureRecognizer.enabled = false
+        
+        setupUI()
     }
     
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -72,35 +51,33 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
     
     func setupUI() {
         self.view.backgroundColor = UIColor(colorString: "#F0F0F0")
-        let oldFrame = self.imageScrollView.frame
-        self.imageScrollView.frame = CGRect(x:oldFrame.origin.x, y:oldFrame.origin.y, width:self.view.frame.width, height:self.view.frame.height)
-        self.swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: "onPreviousPageSwipe:")
-        self.swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: "onNextPageSwipe:")
-        self.swipeLeftRecognizer!.direction = UISwipeGestureRecognizerDirection.Left
-        self.imageScrollView.addGestureRecognizer(swipeLeftRecognizer!)
-        self.imageScrollView.addGestureRecognizer(swipeRightRecognizer!)
+        // scrollview frame
+        var oldFrame = imageScrollView.frame
+        imageScrollView.frame = CGRect(x:oldFrame.origin.x, y:oldFrame.origin.y, width:self.view.frame.width, height:self.view.frame.height)
         
-        // card view
-        contentGroupView = UIView(frame: CGRect(x:cardInsets.left, y:cardInsets.top, width:self.imageScrollView.frame.width - cardInsets.left - cardInsets.right, height:self.imageScrollView.frame.height))
-        contentGroupView!.layer.borderWidth = 1
-        contentGroupView!.backgroundColor = UIColor.whiteColor()
-        contentGroupView!.layer.borderColor = UIColor(colorString: AtColor.BorderLightGray.rawValue).CGColor
+        // gesture
+        swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: "onPreviousPageSwipe:")
+        swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: "onNextPageSwipe:")
+        swipeLeftRecognizer!.direction = UISwipeGestureRecognizerDirection.Left
+        imageScrollView.addGestureRecognizer(swipeLeftRecognizer!)
+        imageScrollView.addGestureRecognizer(swipeRightRecognizer!)
         
-        // image view init
-        detailImageView?.removeGestureRecognizer(tapRecognizer!)
-        detailImageView = UIImageView(frame: CGRect(x:-cardInsets.left, y:cardTopBarHeight, width:contentGroupView!.frame.width, height:self.imageScrollView!.frame.height))
-        detailImageView!.contentMode = UIViewContentMode.ScaleAspectFit
-        tapRecognizer = UITapGestureRecognizer(target: self, action: "openZoomView")
-        detailImageView!.addGestureRecognizer(tapRecognizer!)
-        detailImageView!.userInteractionEnabled = true
+        contentGroupViewLeft = PhotoDetailCard(origin:CGPoint(x:-375,y:0),size:CGSize(width:imageScrollView.frame.width, height:imageScrollView.frame.height), placeHolderImage:nil)
         
-        // follow button
-        followButton = FollowPhotographerButton()
-        followButton!.setPosition(contentGroupView!.frame.width - followButton!.frame.width - topBarInsets.right, y:topBarInsets.top)
+        contentGroupViewMiddle = PhotoDetailCard(origin:CGPoint(x:0,y:0),size:CGSize(width:imageScrollView.frame.width, height:imageScrollView.frame.height), placeHolderImage:placeHolderImageMiddle)
         
-        contentGroupView!.addSubview(followButton!)
-        contentGroupView!.addSubview(detailImageView!)
-        imageScrollView!.addSubview(contentGroupView!)
+        if placeHolderImageMiddle != nil {
+            let calculatedWidth = self.contentGroupViewMiddle!.frame.width
+            // 等比缩放计算
+            let calculatedHeight = self.placeHolderImageMiddle!.size.height * self.contentGroupViewMiddle!.frame.width / self.placeHolderImageMiddle!.size.width
+            self.onContentSizeChange(CGSize(width: calculatedWidth, height:calculatedHeight))
+        }
+        
+        contentGroupViewRight = PhotoDetailCard(origin:CGPoint(x:375,y:0), size:CGSize(width:imageScrollView.frame.width, height:imageScrollView.frame.height), placeHolderImage:nil)
+
+        imageScrollView!.addSubview(contentGroupViewLeft!)
+        imageScrollView!.addSubview(contentGroupViewMiddle!)
+        imageScrollView!.addSubview(contentGroupViewRight!)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -109,79 +86,107 @@ class PhotoDetailViewController: UIViewController, ActivityPhotoZoomingViewDeleg
     }
     
     func getPhotoDetail() {
-        AtHttpClient().getPhotoDetail(self.photo!.id, activityId: self.photo!.activityId, seperateId: self.photo!.seperateId, returnHandler: {(error:Int, photo:PhotoDetail?) in
+        AtHttpClient().getCurrentPhotoDetail(self.photoId!, activityId: self.activityId!, seperateId: self.seperateId!, returnHandler: {(error:Int, photo:PhotoDetail?) in
             if error == 0 {
-                self.photoDetail = photo
-                AtHttpClient().getPhotographer(self.photoDetail!.proId, returnHandler:{(error:Int, photographer:Photographer?) in
-                    self.photographer = photographer
+                self.contentGroupViewMiddle!.photoDetail = photo
+                AtHttpClient().getPhotographer(photo!.proId, returnHandler:{(error:Int, photographer:Photographer?) in
+                    self.contentGroupViewMiddle!.photographer = photographer
                 })
+                self.getPreviousAndNextPhotoDetails(photo);
             }
         })
     }
     
-    func getImage() {
-        self.detailImageView!.hnk_setImageFromURL(NSURL(string: self.photoDetail!.url)!, success: { image in
-            dispatch_async(dispatch_get_main_queue()){
-                // 等比缩放计算
-                let calculatedWidth = self.detailImageView!.frame.width
-                let calculatedHeight = image.size.height * self.detailImageView!.frame.width / image.size.width
-                // 设置图片 更新frame
-                self.detailImageView!.frame = CGRect(x:self.detailImageView!.frame.origin.x, y:self.detailImageView!.frame.origin.y,width:self.imageScrollView.frame.width, height:calculatedHeight)
-                self.detailImageUImage = image
-                
-                // 更新 contentView frame
-                let oldFrame = self.contentGroupView!.frame
-                self.contentGroupView!.frame = CGRect(x:oldFrame.origin.x, y:oldFrame.origin.y, width:oldFrame.width, height:self.detailImageView!.frame.height + self.cardTopBarHeight + self.cardBottomBarHeight)
-                
-                // scrollView
-                self.imageScrollView.contentSize = CGSize(width: self.contentGroupView!.frame.width, height: self.contentGroupView!.frame.height)
-            }
-        })
-    }
-    
-    func refreshTopBar(){
-        dispatch_async(dispatch_get_main_queue()){
-            self.photographerAvatar = PhotographerBarButton(photographer: self.photographer!)
-            let oldFrame = self.photographerAvatar!.frame
-            self.photographerAvatar!.frame = CGRect(x:oldFrame.origin.x + self.topBarInsets.left, y:oldFrame.origin.y + self.topBarInsets.top, width:oldFrame.width, height:oldFrame.height)
-            self.contentGroupView!.addSubview(self.photographerAvatar!)
+    func getPreviousAndNextPhotoDetails(photoDetail:PhotoDetail?){
+        if let pd = photoDetail {
+            AtHttpClient().getPreviousPhotoDetail(self.photoId!, activityId: self.activityId!, seperateId: self.seperateId!, returnHandler: {(error:Int, photo:PhotoDetail?) in
+                if error == 0 {
+                    if photo != nil {
+                        self.contentGroupViewLeft!.photoDetail = photo
+                        AtHttpClient().getPhotographer(photo!.proId, returnHandler:{(error:Int, photographer:Photographer?) in
+                            self.contentGroupViewLeft!.photographer = photographer
+                        })
+                    }
+                }
+            })
+            AtHttpClient().getNextPhotoDetail(self.photoId!, activityId: self.activityId!, seperateId: self.seperateId!, returnHandler: {(error:Int, photo:PhotoDetail?) in
+                if error == 0 {
+                    if photo != nil {
+                        self.contentGroupViewRight!.photoDetail = photo
+                        AtHttpClient().getPhotographer(photo!.proId, returnHandler:{(error:Int, photographer:Photographer?) in
+                            self.contentGroupViewRight!.photographer = photographer
+                        })
+                    }
+                }
+            })
         }
     }
     
     func onPreviousPageSwipe(sender:UISwipeGestureRecognizer) {
-        UIView.animateWithDuration(0.5, animations: {
-            var oldCenter = self.contentGroupView!.center
-            self.contentGroupView!.center = CGPoint(x:oldCenter.x+self.view.frame.width,y:oldCenter.y)
-        })
-    }
-    func onNextPageSwipe(sender:UISwipeGestureRecognizer) {
-        UIView.animateWithDuration(0.5, animations: {
-            var oldCenter = self.contentGroupView!.center
-            self.contentGroupView!.center = CGPoint(x:oldCenter.x-self.view.frame.width,y:oldCenter.y)
-        })
-
-    }
-    
-    func lsImgZoomView(close:Bool){
-        
-    }
-
-    
-    func openZoomView(){
-        var imgsize = self.detailImageUImage!.size
-        var frameHeight = imgsize.height * self.view.frame.width / imgsize.width
-        var frameY = (self.view.frame.height - imgsize.height) / 2
-        var baseframe = CGRect(x:0,y: frameY, width:self.view.frame.width, height:frameHeight)
-        
-        var zoomv = ActivityPhotoZoomingView(baseframe: baseframe, p:self.photoDetail!,image:self.detailImageUImage!)
-        zoomv.delegate = self
-        zoomv.setCurrImg(self.detailImageView!.image!)
-        zoomv.show()
-        
-        zoomv.blockClose = {(done:Bool) -> Void in
-            //
-            self.detailImageView!.hidden = false
+        if  self.contentGroupViewLeft!.photoDetail != nil {
+            self.swipe(self.view.frame.width, scrollerViewContentHeight:self.contentGroupViewLeft!.frame.height)
+            if self.contentGroupViewTemp != nil {
+                self.contentGroupViewTemp!.removeFromSuperview()
+            }
+            self.contentGroupViewTemp = self.contentGroupViewRight
+            self.contentGroupViewRight = self.contentGroupViewMiddle
+            self.contentGroupViewMiddle = self.contentGroupViewLeft
+            self.contentGroupViewLeft = PhotoDetailCard(origin:CGPoint(x:-UIScreen.mainScreen().bounds.width,y:0), size:CGSize(width:imageScrollView.frame.width, height:imageScrollView.frame.height), placeHolderImage:nil)
+            self.imageScrollView.addSubview(self.contentGroupViewLeft!)
+            self.photoId = self.contentGroupViewMiddle!.photoDetail!.id
+            AtHttpClient().getPreviousPhotoDetail(self.photoId!, activityId: self.activityId!, seperateId: self.seperateId!, returnHandler: {(error:Int, photo:PhotoDetail?) in
+                if error == 0 {
+                    if photo != nil {
+                        self.contentGroupViewLeft!.photoDetail = photo
+                        AtHttpClient().getPhotographer(photo!.proId, returnHandler:{(error:Int, photographer:Photographer?) in
+                            self.contentGroupViewLeft!.photographer = photographer
+                        })
+                    }
+                }
+            })
         }
+    }
+    
+    func onNextPageSwipe(sender:UISwipeGestureRecognizer) {
+        if  self.contentGroupViewRight!.photoDetail != nil {
+            self.swipe(-self.view.frame.width, scrollerViewContentHeight:self.contentGroupViewRight!.frame.height)
+            if self.contentGroupViewTemp != nil {
+                self.contentGroupViewTemp!.removeFromSuperview()
+            }
+            self.contentGroupViewTemp = self.contentGroupViewLeft
+            self.contentGroupViewLeft = self.contentGroupViewMiddle
+            self.contentGroupViewMiddle = self.contentGroupViewRight
+            self.contentGroupViewRight = PhotoDetailCard(origin:CGPoint(x:UIScreen.mainScreen().bounds.width,y:0), size:CGSize(width:imageScrollView.frame.width, height:imageScrollView.frame.height), placeHolderImage:nil)
+            self.imageScrollView.addSubview(self.contentGroupViewRight!)
+            self.photoId = self.contentGroupViewMiddle!.photoDetail!.id
+            AtHttpClient().getNextPhotoDetail(self.photoId!, activityId: self.activityId!, seperateId: self.seperateId!, returnHandler: {(error:Int, photo:PhotoDetail?) in
+                if error == 0 {
+                    if photo != nil {
+                        self.contentGroupViewRight!.photoDetail = photo
+                        AtHttpClient().getPhotographer(photo!.proId, returnHandler:{(error:Int, photographer:Photographer?) in
+                            self.contentGroupViewRight!.photographer = photographer
+                        })
+                    }
+                }
+            })
+        }
+    }
+    
+    private func swipe(xDistance:CGFloat, scrollerViewContentHeight:CGFloat){
+        self.onContentSizeChange(CGSize(width: UIScreen.mainScreen().bounds.width, height: scrollerViewContentHeight))
+        UIView.animateWithDuration(0.5, animations: {
+            var oldCenter = self.contentGroupViewMiddle!.center
+            self.contentGroupViewMiddle!.center = CGPoint(x:oldCenter.x+xDistance,y:oldCenter.y)
+            var oldCenter2 = self.contentGroupViewLeft!.center
+            self.contentGroupViewLeft!.center = CGPoint(x:oldCenter2.x+xDistance,y:oldCenter2.y)
+            var oldCenter3 = self.contentGroupViewRight!.center
+            self.contentGroupViewRight!.center = CGPoint(x:oldCenter3.x+xDistance,y:oldCenter3.y)
 
+        })
+    }
+    
+    func onContentSizeChange(newSize: CGSize) {
+        println("SIZE CHANGE TO : \(newSize)")
+        self.imageScrollView.contentSize = newSize
     }
 }

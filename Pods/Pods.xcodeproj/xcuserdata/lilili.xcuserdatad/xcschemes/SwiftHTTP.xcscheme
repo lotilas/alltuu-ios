@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'ED1C3D5EBB6513E3B2858C99'
-               BlueprintName = 'MapleBacon'
+               BlueprintIdentifier = 'F6E32610251DE4018F102024'
+               BlueprintName = 'SwiftHTTP'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'MapleBacon.framework'>
+               BuildableName = 'SwiftHTTP.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

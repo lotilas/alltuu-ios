@@ -11,7 +11,12 @@ import Foundation
 public enum AtColor:String {
     case BackgroundLightGray = "#F6F6F6"
     case BorderLightGray = "#E8E8E8"
+    case BorderDarkGray = "#555555"
+    
+    case IconFontDarkGray = "#646464"
+    
     case DarkGray = "#333333"
+    
     case RedNormal = "#FF4343"
     case RedActive = "#FF4C4C"
     case BlueActive = "#11A5EE"

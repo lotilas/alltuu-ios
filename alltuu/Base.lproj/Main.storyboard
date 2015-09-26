@@ -635,7 +635,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVS-AT-e8m">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVS-AT-e8m" customClass="DetailPropertyButtonGroup" customModule="alltuu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -650,16 +650,20 @@
                         <constraints>
                             <constraint firstItem="mVS-AT-e8m" firstAttribute="top" secondItem="z3Y-ca-exp" secondAttribute="bottom" id="1lk-Cv-IXn"/>
                             <constraint firstItem="XAR-45-dJY" firstAttribute="top" secondItem="mVS-AT-e8m" secondAttribute="bottom" id="NqI-ZF-uWM"/>
+                            <constraint firstItem="z3Y-ca-exp" firstAttribute="trailing" secondItem="mVS-AT-e8m" secondAttribute="trailing" id="W9F-Pv-4Nn"/>
                             <constraint firstItem="z3Y-ca-exp" firstAttribute="top" secondItem="ISg-YY-pFl" secondAttribute="bottom" id="YiG-ek-i9A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mVS-AT-e8m" secondAttribute="trailing" constant="-16" id="ZjT-ZG-da6"/>
                             <constraint firstItem="z3Y-ca-exp" firstAttribute="leading" secondItem="87t-gs-4aN" secondAttribute="leadingMargin" constant="-16" id="eCw-Th-dZr"/>
                             <constraint firstItem="z3Y-ca-exp" firstAttribute="leading" secondItem="87t-gs-4aN" secondAttribute="leadingMargin" constant="-16" id="gb3-nw-H1M"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z3Y-ca-exp" secondAttribute="trailing" constant="-16" id="q8v-sy-XOk"/>
+                            <constraint firstItem="z3Y-ca-exp" firstAttribute="leading" secondItem="mVS-AT-e8m" secondAttribute="leading" id="sMO-i6-OXj"/>
                             <constraint firstItem="mVS-AT-e8m" firstAttribute="leading" secondItem="87t-gs-4aN" secondAttribute="leadingMargin" constant="-16" id="zhu-Fe-Ewm"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="gb3-nw-H1M"/>
+                                <exclude reference="ZjT-ZG-da6"/>
+                                <exclude reference="zhu-Fe-Ewm"/>
                             </mask>
                         </variation>
                     </view>
@@ -742,6 +746,6 @@
         <image name="lock" width="67" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GdQ-jL-yW9"/>
+        <segue reference="DNj-Dc-oJP"/>
     </inferredMetricsTieBreakers>
 </document>

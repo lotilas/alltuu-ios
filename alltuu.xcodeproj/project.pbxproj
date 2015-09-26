@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		821E32771BA2CD0C004C2EA4 /* AtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E32761BA2CD0C004C2EA4 /* AtViewController.swift */; };
-		825583A41BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825583A31BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift */; };
 		8263F5801BAD63D700432E7B /* AtImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F57F1BAD63D700432E7B /* AtImageViewExtension.swift */; };
 		82694DEC1BAF0066002E11D3 /* PhotoDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */; };
 		82694DEE1BAF0F94002E11D3 /* AtScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82694DED1BAF0F94002E11D3 /* AtScrollViewDelegate.swift */; };
@@ -33,6 +32,15 @@
 		82AA65E11BA6E5D300B4BD01 /* SeperateBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AA65E01BA6E5D300B4BD01 /* SeperateBarButton.swift */; };
 		82BF11D31BA7C6240042438D /* PhotographerBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF11D21BA7C6240042438D /* PhotographerBarButton.swift */; };
 		82BF11D51BA7D3400042438D /* Photographer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BF11D41BA7D3400042438D /* Photographer.swift */; };
+		82CBB9E31BB51D23003CF35A /* AtNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9E21BB51D23003CF35A /* AtNavigationDelegate.swift */; };
+		82CBB9E71BB52D0D003CF35A /* PropertyLikeCountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9E61BB52D0D003CF35A /* PropertyLikeCountButton.swift */; };
+		82CBB9E91BB52D28003CF35A /* PropertyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9E81BB52D28003CF35A /* PropertyButton.swift */; };
+		82CBB9EB1BB53273003CF35A /* DetailPropertyButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9EA1BB53273003CF35A /* DetailPropertyButtonGroup.swift */; };
+		82CBB9F51BB55896003CF35A /* AtFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9F41BB55896003CF35A /* AtFontIcon.swift */; };
+		82CBB9F71BB55B8F003CF35A /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82CBB9F61BB55B84003CF35A /* iconfont.ttf */; };
+		82CBB9F91BB56F8C003CF35A /* PropertyCommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9F81BB56F8C003CF35A /* PropertyCommentButton.swift */; };
+		82CBB9FB1BB56FC6003CF35A /* PropertyShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9FA1BB56FC6003CF35A /* PropertyShareButton.swift */; };
+		82CBB9FD1BB56FD3003CF35A /* PropertyDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CBB9FC1BB56FD3003CF35A /* PropertyDownloadButton.swift */; };
 		82D76CBD1BAC26B60051D27E /* FollowPhotographerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D76CBC1BAC26B60051D27E /* FollowPhotographerButton.swift */; };
 		82D76CC11BACF03E0051D27E /* AtCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D76CC01BACF03E0051D27E /* AtCacheManager.swift */; };
 		82E927681BAADCA2002878F5 /* PhotoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E927671BAADCA2002878F5 /* PhotoDetail.swift */; };
@@ -82,7 +90,6 @@
 		0680613B53CF69D1D4C416C0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37237399CD62F383A56A9519 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		821E32761BA2CD0C004C2EA4 /* AtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtViewController.swift; sourceTree = "<group>"; };
-		825583A31BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailPagingDelegate.swift; sourceTree = "<group>"; };
 		8263F57F1BAD63D700432E7B /* AtImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtImageViewExtension.swift; sourceTree = "<group>"; };
 		82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailCard.swift; sourceTree = "<group>"; };
 		82694DED1BAF0F94002E11D3 /* AtScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtScrollViewDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +114,15 @@
 		82AA65E01BA6E5D300B4BD01 /* SeperateBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeperateBarButton.swift; sourceTree = "<group>"; };
 		82BF11D21BA7C6240042438D /* PhotographerBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotographerBarButton.swift; sourceTree = "<group>"; };
 		82BF11D41BA7D3400042438D /* Photographer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photographer.swift; sourceTree = "<group>"; };
+		82CBB9E21BB51D23003CF35A /* AtNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtNavigationDelegate.swift; sourceTree = "<group>"; };
+		82CBB9E61BB52D0D003CF35A /* PropertyLikeCountButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyLikeCountButton.swift; sourceTree = "<group>"; };
+		82CBB9E81BB52D28003CF35A /* PropertyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyButton.swift; sourceTree = "<group>"; };
+		82CBB9EA1BB53273003CF35A /* DetailPropertyButtonGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPropertyButtonGroup.swift; sourceTree = "<group>"; };
+		82CBB9F41BB55896003CF35A /* AtFontIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtFontIcon.swift; sourceTree = "<group>"; };
+		82CBB9F61BB55B84003CF35A /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
+		82CBB9F81BB56F8C003CF35A /* PropertyCommentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyCommentButton.swift; sourceTree = "<group>"; };
+		82CBB9FA1BB56FC6003CF35A /* PropertyShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyShareButton.swift; sourceTree = "<group>"; };
+		82CBB9FC1BB56FD3003CF35A /* PropertyDownloadButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyDownloadButton.swift; sourceTree = "<group>"; };
 		82D76CBC1BAC26B60051D27E /* FollowPhotographerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowPhotographerButton.swift; sourceTree = "<group>"; };
 		82D76CC01BACF03E0051D27E /* AtCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtCacheManager.swift; sourceTree = "<group>"; };
 		82E927671BAADCA2002878F5 /* PhotoDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetail.swift; sourceTree = "<group>"; };
@@ -165,6 +181,7 @@
 				82AA65C71BA6567100B4BD01 /* AtHttpClient.swift */,
 				829077201BA82427006C0159 /* AtColor.swift */,
 				829077321BA985C5006C0159 /* AtIdentifies.swift */,
+				82CBB9F41BB55896003CF35A /* AtFontIcon.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -172,8 +189,8 @@
 		825583A21BAEC8CF00C2CFDC /* delegates */ = {
 			isa = PBXGroup;
 			children = (
-				825583A31BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift */,
 				82694DED1BAF0F94002E11D3 /* AtScrollViewDelegate.swift */,
+				82CBB9E21BB51D23003CF35A /* AtNavigationDelegate.swift */,
 			);
 			name = delegates;
 			sourceTree = "<group>";
@@ -225,6 +242,12 @@
 				82E927691BAAEF62002878F5 /* AtPhotoPropertyView.swift */,
 				82D76CBC1BAC26B60051D27E /* FollowPhotographerButton.swift */,
 				82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */,
+				82CBB9E61BB52D0D003CF35A /* PropertyLikeCountButton.swift */,
+				82CBB9FA1BB56FC6003CF35A /* PropertyShareButton.swift */,
+				82CBB9FC1BB56FD3003CF35A /* PropertyDownloadButton.swift */,
+				82CBB9F81BB56F8C003CF35A /* PropertyCommentButton.swift */,
+				82CBB9EA1BB53273003CF35A /* DetailPropertyButtonGroup.swift */,
+				82CBB9E81BB52D28003CF35A /* PropertyButton.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -279,6 +302,7 @@
 		82F1B31B1BA02BC000B4E8F7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				82CBB9F61BB55B84003CF35A /* iconfont.ttf */,
 				82F1B3481BA02DAB00B4E8F7 /* loading.jpg */,
 				82F1B31D1BA02BC000B4E8F7 /* AppDelegate.swift */,
 				82F1B3271BA02BC000B4E8F7 /* Images.xcassets */,
@@ -410,6 +434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82CBB9F71BB55B8F003CF35A /* iconfont.ttf in Resources */,
 				82F1B3491BA02DAB00B4E8F7 /* loading.jpg in Resources */,
 				82F1B3261BA02BC000B4E8F7 /* Main.storyboard in Resources */,
 				82F1B3281BA02BC000B4E8F7 /* Images.xcassets in Resources */,
@@ -478,16 +503,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82CBB9FD1BB56FD3003CF35A /* PropertyDownloadButton.swift in Sources */,
 				82E9276A1BAAEF62002878F5 /* AtPhotoPropertyView.swift in Sources */,
 				82BF11D31BA7C6240042438D /* PhotographerBarButton.swift in Sources */,
-				825583A41BAEC9EB00C2CFDC /* PhotoDetailPagingDelegate.swift in Sources */,
 				82F1B3A21BA288D500B4E8F7 /* ActivityPhotoZoomingView.swift in Sources */,
 				821E32771BA2CD0C004C2EA4 /* AtViewController.swift in Sources */,
 				82F1B3461BA02D4700B4E8F7 /* Activity.swift in Sources */,
 				82D76CBD1BAC26B60051D27E /* FollowPhotographerButton.swift in Sources */,
+				82CBB9F91BB56F8C003CF35A /* PropertyCommentButton.swift in Sources */,
 				82AA65E11BA6E5D300B4BD01 /* SeperateBarButton.swift in Sources */,
 				82AA65D91BA6BABE00B4BD01 /* PhotographerBarView.swift in Sources */,
 				82D76CC11BACF03E0051D27E /* AtCacheManager.swift in Sources */,
+				82CBB9E91BB52D28003CF35A /* PropertyButton.swift in Sources */,
+				82CBB9FB1BB56FC6003CF35A /* PropertyShareButton.swift in Sources */,
 				8290772F1BA95A16006C0159 /* AtLoadMoreFootView.swift in Sources */,
 				82A0A6CF1BA2A7BA005AD107 /* AtCollectionView.swift in Sources */,
 				82694DEE1BAF0F94002E11D3 /* AtScrollViewDelegate.swift in Sources */,
@@ -495,6 +523,7 @@
 				82E927681BAADCA2002878F5 /* PhotoDetail.swift in Sources */,
 				829077231BA827B3006C0159 /* NavigationBackgroundView.swift in Sources */,
 				82BF11D51BA7D3400042438D /* Photographer.swift in Sources */,
+				82CBB9EB1BB53273003CF35A /* DetailPropertyButtonGroup.swift in Sources */,
 				829077251BA936DB006C0159 /* ActivitySearchCell.swift in Sources */,
 				82F1B3601BA09FE300B4E8F7 /* ActivitiesViewController.swift in Sources */,
 				8263F5801BAD63D700432E7B /* AtImageViewExtension.swift in Sources */,
@@ -502,6 +531,7 @@
 				829077391BAA8F85006C0159 /* AtSearchBar.swift in Sources */,
 				829077271BA936EC006C0159 /* ActivitySearchView.swift in Sources */,
 				82F1B3211BA02BC000B4E8F7 /* alltuu.xcdatamodeld in Sources */,
+				82CBB9E31BB51D23003CF35A /* AtNavigationDelegate.swift in Sources */,
 				829077211BA82427006C0159 /* AtColor.swift in Sources */,
 				82A0A6D11BA2A80E005AD107 /* ActivityPhotosView.swift in Sources */,
 				829077371BAA8B1D006C0159 /* PhotoDetailViewController.swift in Sources */,
@@ -514,7 +544,9 @@
 				829077311BA96F30006C0159 /* ActivitySearchViewController.swift in Sources */,
 				829077291BA95780006C0159 /* AtTableView.swift in Sources */,
 				82A0A6C91BA2A574005AD107 /* ActivityPhotosViewController.swift in Sources */,
+				82CBB9E71BB52D0D003CF35A /* PropertyLikeCountButton.swift in Sources */,
 				829077331BA985C5006C0159 /* AtIdentifies.swift in Sources */,
+				82CBB9F51BB55896003CF35A /* AtFontIcon.swift in Sources */,
 				82F1B3441BA02D4700B4E8F7 /* ActivityView.swift in Sources */,
 				82F1B3981BA17DA600B4E8F7 /* Seperate.swift in Sources */,
 			);

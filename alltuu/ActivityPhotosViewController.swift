@@ -22,6 +22,7 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     
     var pageCount = 12
     var currentPage = 0
+    var currentSepName:String?
     var activityId = 0
     var activityTitle :String?
     var seperateId = 0
@@ -175,7 +176,10 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
             var btn:SeperateBarButton = SeperateBarButton(titleText: seperate.sepName, sepId:seperate.sepId)
             seperateBarView.addSubview(btn)
         }
-        self.seperateBarView.highlightButtonAt(0)
+        if seperates.count > 0 {
+            self.currentSepName = seperates[0].sepName
+            self.seperateBarView.highlightButtonAt(0)
+        }
     }
     
     func loadPhotographers(){
@@ -190,6 +194,7 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
     func onSeperateSwitch(sender:UIButton){
         if let button = sender as? SeperateBarButton {
             seperateId = button.sepId
+            currentSepName = button.titleLabel!.text
             seperateBarView.highlightButton(button)
             currentPage = 0
             photographers.removeAll()
@@ -207,6 +212,8 @@ class ActivityPhotosViewController: AtViewController, UICollectionViewDelegate,U
                 destController.photoId = cell.photo!.id
                 destController.activityId = cell.photo!.activityId
                 destController.seperateId = cell.photo!.seperateId
+                destController.activityName = activityTitle
+                destController.seperateName = currentSepName
                 destController.placeHolderImageMiddle = cell.photoView.image
             }
         }

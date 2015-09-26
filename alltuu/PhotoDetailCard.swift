@@ -14,6 +14,11 @@ class PhotoDetailCard: UIView {
     let cardTopBarHeight:CGFloat = 52
     let cardBottomBarHeight:CGFloat = 42
     let topBarInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    let bottomBarInsets = UIEdgeInsets(top:12, left:10, bottom:10, right:10)
+    let activityButtonMarginTop:CGFloat = 4
+    
+    let ComeFrom = "来自："
+    var activity:String = "喔图"
     
     // 中间的大图
     var detailImageUImage:UIImage? {
@@ -33,6 +38,8 @@ class PhotoDetailCard: UIView {
     
     var photographerAvatar:PhotographerBarButton?
     var followButton:FollowPhotographerButton?
+    var activityButton:UIButton?
+    var comeFromLabel:UILabel?
     
     // 摄影师
     var photographer:Photographer? {
@@ -44,6 +51,8 @@ class PhotoDetailCard: UIView {
     // tap
     var tapRecognizer:UITapGestureRecognizer?
     
+    var navigationDelegate:AtNavigationDelegate?
+    
     var photoDetail:PhotoDetail? {
         didSet {
             if photoDetail != nil {
@@ -52,19 +61,25 @@ class PhotoDetailCard: UIView {
         }
     }
     
-    init(origin:CGPoint, size:CGSize, placeHolderImage:UIImage?){
+    init(origin:CGPoint, size:CGSize, activityName:String?, placeHolderImage:UIImage?, navigationControllerDelegate:AtNavigationDelegate? = nil){
         var rect = CGRect(x:origin.x + cardInsets.left, y:origin.y + cardInsets.top, width:size.width - cardInsets.left - cardInsets.right, height:size.height)
         super.init(frame: rect)
         self.layer.borderWidth = 1
         self.backgroundColor = UIColor.whiteColor()
         self.layer.borderColor = UIColor(colorString: AtColor.BorderLightGray.rawValue).CGColor
 
+        if activityName != nil {
+            self.activity = activityName!
+        }
+        
         if let ph = placeHolderImage {
             dispatch_async(dispatch_get_main_queue()) {
                 self.detailImageUImage = ph
                 self.resizeFrame(ph)
             }
         }
+        
+        self.navigationDelegate = navigationControllerDelegate
         
         // 图片 摄影师 关注
         addSubviews()
@@ -87,8 +102,28 @@ class PhotoDetailCard: UIView {
         followButton = FollowPhotographerButton()
         followButton!.setPosition(self.frame.width - followButton!.frame.width - topBarInsets.right, y:topBarInsets.top)
         
+        comeFromLabel = UILabel(frame: CGRect(x:bottomBarInsets.left,y:self.frame.height-30,width:100,height:100))
+        comeFromLabel!.font = UIFont.systemFontOfSize(14)
+        comeFromLabel!.text = "\(ComeFrom)"
+        comeFromLabel!.sizeToFit()
+        
+        activityButton = UIButton(frame: CGRect(x:bottomBarInsets.left + comeFromLabel!.frame.width,y:self.frame.height-30,width:100,height:100))
+        activityButton!.titleLabel!.font = UIFont.systemFontOfSize(16)
+        activityButton!.setTitle("\(activity)", forState: UIControlState.Normal)
+        activityButton!.setTitleColor(UIColor(colorString: AtColor.BlueActive.rawValue), forState: UIControlState.Normal)
+        activityButton!.sizeToFit()
+        activityButton!.addTarget(self, action: "onActivityButtonClick", forControlEvents: UIControlEvents.TouchUpInside)
+        
         self.addSubview(followButton!)
         self.addSubview(detailImageView!)
+        self.addSubview(comeFromLabel!)
+        self.addSubview(activityButton!)
+    }
+    
+    func onActivityButtonClick(){
+        if let navi = navigationDelegate {
+            navigationDelegate!.shouldPopToParentView()
+        }
     }
     
     
@@ -98,6 +133,11 @@ class PhotoDetailCard: UIView {
             let oldFrame = self.photographerAvatar!.frame
             self.photographerAvatar!.frame = CGRect(x:oldFrame.origin.x + self.topBarInsets.left, y:oldFrame.origin.y + self.topBarInsets.top, width:oldFrame.width, height:oldFrame.height)
             self.addSubview(self.photographerAvatar!)
+            if self.photographer!.isFollowed == 0{
+                self.followButton!.setFollowStatus(FollowStatus.NO)
+            } else {
+                self.followButton!.setFollowStatus(FollowStatus.YES)
+            }
         }
     }
     
@@ -117,6 +157,13 @@ class PhotoDetailCard: UIView {
             // 更新 contentView frame
             let oldFrame = self.frame
             self.frame = CGRect(x:oldFrame.origin.x, y:oldFrame.origin.y, width:oldFrame.width, height:self.detailImageView!.frame.height + self.cardTopBarHeight + self.cardBottomBarHeight)
+            
+            var of = self.comeFromLabel!.frame
+            self.comeFromLabel!.frame = CGRect(x:of.origin.x, y:self.cardTopBarHeight + self.detailImageView!.frame.height + self.bottomBarInsets.top, width:of.width, height:of.height)
+            
+            of = self.activityButton!.frame
+            self.activityButton!.frame = CGRect(x:of.origin.x, y:self.cardTopBarHeight + self.detailImageView!.frame.height + activityButtonMarginTop, width:of.width, height:of.height)
+            
         }
     }
     

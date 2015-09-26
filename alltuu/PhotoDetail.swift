@@ -17,6 +17,7 @@ public enum PhotoSize:String {
 public class PhotoDetail {
     public let id: Int
     public let smallUrl: String
+    public let bigUrl: String
     public let url: String
     public let isLike: Int
     public let likeTimes: Int
@@ -33,6 +34,11 @@ public class PhotoDetail {
             self.smallUrl = smallUrl as String
         } else {
             self.smallUrl = ""
+        }
+        if let bigUrl = dictionary["bigUrl"] as? NSString {
+            self.bigUrl = bigUrl as String
+        } else {
+            self.bigUrl = ""
         }
         if let url = dictionary["url"] as? NSString {
             self.url = url as String

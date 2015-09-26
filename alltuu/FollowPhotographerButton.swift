@@ -8,10 +8,23 @@
 
 import UIKit
 
+public enum FollowStatus {
+    case YES
+    case NO
+}
+
 class FollowPhotographerButton: UIButton {
     
     let width:CGFloat = 46
     let height:CGFloat = 30
+    
+    var followStatus:FollowStatus? {
+        didSet {
+            if followStatus != nil {
+                self.setFollowStatus(followStatus!)
+            }
+        }
+    }
     
     convenience init() {
         self.init(x:0, y:0)
@@ -22,9 +35,32 @@ class FollowPhotographerButton: UIButton {
         self.layer.cornerRadius = 15
         self.setTitle("关注", forState: UIControlState.Normal)
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor(colorString: "#555555").CGColor
-        self.setTitleColor(UIColor(colorString: "#555555"), forState: UIControlState.Normal)
         self.titleLabel?.font = UIFont.systemFontOfSize(12)
+        self.followStatus = FollowStatus.NO
+        self.addTarget(self, action: "onFollowButtonClick", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func setFollowStatus(status:FollowStatus) {
+        if status == FollowStatus.YES {
+            self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            self.layer.backgroundColor = UIColor(colorString: AtColor.BlueNormal.rawValue).CGColor
+            self.layer.borderColor = UIColor(colorString: AtColor.BlueNormal.rawValue).CGColor
+        } else {
+            self.setTitleColor(UIColor(colorString: AtColor.BorderDarkGray.rawValue), forState: UIControlState.Normal)
+            self.layer.backgroundColor = UIColor.whiteColor().CGColor
+            self.layer.borderColor = UIColor(colorString: AtColor.BorderDarkGray.rawValue).CGColor
+
+        }
+    }
+    
+    func onFollowButtonClick(){
+        dispatch_async(dispatch_get_main_queue()) {
+            if self.followStatus == FollowStatus.NO {
+                self.followStatus = FollowStatus.YES
+            } else {
+                self.followStatus = FollowStatus.NO
+            }
+        }
     }
     
     required init(coder aDecoder: NSCoder) {

@@ -16,6 +16,8 @@ public class Photographer {
     public let url: String
     public let sub: String      // 二级域名
     public let dsc: String      // 描述
+    public let usrId: Int
+    public let isFollowed: Int
     
     init(dictionary : NSDictionary) {
         if let id = dictionary["id"] as? NSNumber {
@@ -42,6 +44,16 @@ public class Photographer {
             self.dsc = dsc as String
         } else {
             self.dsc = ""
+        }
+        if let usrId = dictionary["usrId"] as? NSNumber {
+            self.usrId = usrId as Int
+        } else {
+            self.usrId = 0
+        }
+        if let isFollowed = dictionary["isFollowed"] as? NSNumber {
+            self.isFollowed = isFollowed as Int
+        } else {
+            self.isFollowed = 0
         }
     }
     

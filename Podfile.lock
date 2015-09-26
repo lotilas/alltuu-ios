@@ -1,0 +1,13 @@
+PODS:
+  - HanekeSwift (0.9.1)
+  - SwiftHTTP (0.9.5)
+
+DEPENDENCIES:
+  - HanekeSwift
+  - SwiftHTTP (~> 0.9.4)
+
+SPEC CHECKSUMS:
+  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
+  SwiftHTTP: cd7b248bc07db02926ff54cf19b580b78f7abfa1
+
+COCOAPODS: 0.39.0.beta.4

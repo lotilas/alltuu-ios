@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		821E32771BA2CD0C004C2EA4 /* AtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821E32761BA2CD0C004C2EA4 /* AtViewController.swift */; };
+		823F34A31BB6944600A2F712 /* AtColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823F34A21BB6944600A2F712 /* AtColor.swift */; };
 		8263F5801BAD63D700432E7B /* AtImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F57F1BAD63D700432E7B /* AtImageViewExtension.swift */; };
 		82694DEC1BAF0066002E11D3 /* PhotoDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */; };
 		82694DEE1BAF0F94002E11D3 /* AtScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82694DED1BAF0F94002E11D3 /* AtScrollViewDelegate.swift */; };
-		829077211BA82427006C0159 /* AtColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077201BA82427006C0159 /* AtColor.swift */; };
 		829077231BA827B3006C0159 /* NavigationBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077221BA827B3006C0159 /* NavigationBackgroundView.swift */; };
 		829077251BA936DB006C0159 /* ActivitySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077241BA936DB006C0159 /* ActivitySearchCell.swift */; };
 		829077271BA936EC006C0159 /* ActivitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829077261BA936EC006C0159 /* ActivitySearchView.swift */; };
@@ -90,10 +90,10 @@
 		0680613B53CF69D1D4C416C0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37237399CD62F383A56A9519 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		821E32761BA2CD0C004C2EA4 /* AtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtViewController.swift; sourceTree = "<group>"; };
+		823F34A21BB6944600A2F712 /* AtColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtColor.swift; sourceTree = "<group>"; };
 		8263F57F1BAD63D700432E7B /* AtImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtImageViewExtension.swift; sourceTree = "<group>"; };
 		82694DEB1BAF0066002E11D3 /* PhotoDetailCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailCard.swift; sourceTree = "<group>"; };
 		82694DED1BAF0F94002E11D3 /* AtScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtScrollViewDelegate.swift; sourceTree = "<group>"; };
-		829077201BA82427006C0159 /* AtColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AtColor.swift; path = ../AtColor.swift; sourceTree = "<group>"; };
 		829077221BA827B3006C0159 /* NavigationBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackgroundView.swift; sourceTree = "<group>"; };
 		829077241BA936DB006C0159 /* ActivitySearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySearchCell.swift; sourceTree = "<group>"; };
 		829077261BA936EC006C0159 /* ActivitySearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySearchView.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 			children = (
 				82D76CC01BACF03E0051D27E /* AtCacheManager.swift */,
 				82AA65C71BA6567100B4BD01 /* AtHttpClient.swift */,
-				829077201BA82427006C0159 /* AtColor.swift */,
+				823F34A21BB6944600A2F712 /* AtColor.swift */,
 				829077321BA985C5006C0159 /* AtIdentifies.swift */,
 				82CBB9F41BB55896003CF35A /* AtFontIcon.swift */,
 			);
@@ -505,6 +505,7 @@
 			files = (
 				82CBB9FD1BB56FD3003CF35A /* PropertyDownloadButton.swift in Sources */,
 				82E9276A1BAAEF62002878F5 /* AtPhotoPropertyView.swift in Sources */,
+				823F34A31BB6944600A2F712 /* AtColor.swift in Sources */,
 				82BF11D31BA7C6240042438D /* PhotographerBarButton.swift in Sources */,
 				82F1B3A21BA288D500B4E8F7 /* ActivityPhotoZoomingView.swift in Sources */,
 				821E32771BA2CD0C004C2EA4 /* AtViewController.swift in Sources */,
@@ -532,7 +533,6 @@
 				829077271BA936EC006C0159 /* ActivitySearchView.swift in Sources */,
 				82F1B3211BA02BC000B4E8F7 /* alltuu.xcdatamodeld in Sources */,
 				82CBB9E31BB51D23003CF35A /* AtNavigationDelegate.swift in Sources */,
-				829077211BA82427006C0159 /* AtColor.swift in Sources */,
 				82A0A6D11BA2A80E005AD107 /* ActivityPhotosView.swift in Sources */,
 				829077371BAA8B1D006C0159 /* PhotoDetailViewController.swift in Sources */,
 				82F1B31E1BA02BC000B4E8F7 /* AppDelegate.swift in Sources */,
